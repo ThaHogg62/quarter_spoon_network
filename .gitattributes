@@ -1,0 +1,2 @@
+# Git LFS tracking for media assets over 50MB (required for GitHub + Netlify)
+*.mp4 filter=lfs diff=lfs merge=lfs -text
