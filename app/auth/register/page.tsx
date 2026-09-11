@@ -134,16 +134,16 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen min-h-[100dvh] w-full max-w-full overflow-x-hidden bg-[#05060A] text-white flex flex-col justify-center py-8 sm:py-12 px-4 sm:px-6 lg:px-8 selection:bg-cyan-500 selection:text-black">
+    <div className="min-h-screen bg-[#05060A] text-white flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-8 selection:bg-cyan-500 selection:text-black">
       {/* Background ambient lighting */}
-      <div className="fixed inset-0 pointer-events-none overflow-hidden -z-10 max-w-full">
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] sm:w-[600px] h-[350px] sm:h-[600px] bg-blue-600/10 rounded-full blur-[100px] sm:blur-[140px]" />
-        <div className="absolute bottom-10 right-10 w-[250px] sm:w-[400px] h-[250px] sm:h-[400px] bg-cyan-500/10 rounded-full blur-[90px] sm:blur-[120px]" />
+      <div className="fixed inset-0 pointer-events-none overflow-hidden -z-10">
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[140px]" />
+        <div className="absolute bottom-10 right-10 w-[400px] h-[400px] bg-cyan-500/10 rounded-full blur-[120px]" />
       </div>
 
-      <div className="w-full max-w-md mx-auto text-center space-y-3 flex flex-col items-center">
+      <div className="sm:mx-auto sm:w-full sm:max-w-md text-center space-y-3 flex flex-col items-center">
         <Link href="/" className="inline-flex flex-col items-center group">
-          <div className="relative w-24 h-28 sm:w-32 sm:h-36 transition-transform duration-300 group-hover:scale-105 drop-shadow-[0_10px_25px_rgba(0,0,0,0.8)] drop-shadow-[0_0_35px_rgba(56,189,248,0.25)]">
+          <div className="relative w-28 h-32 sm:w-32 sm:h-36 transition-transform duration-300 group-hover:scale-105 drop-shadow-[0_10px_25px_rgba(0,0,0,0.8)] drop-shadow-[0_0_35px_rgba(56,189,248,0.25)]">
             <Image
               src="/images/qsn_shield_logo.png"
               alt="Quarter Spoon Network Shield Logo"
@@ -153,7 +153,7 @@ export default function RegisterPage() {
               className="object-contain"
             />
           </div>
-          <span className="font-black tracking-[0.2em] sm:tracking-[0.25em] text-white uppercase text-xs sm:text-sm mt-2">
+          <span className="font-black tracking-[0.25em] text-white uppercase text-xs sm:text-sm mt-2">
             Quarter Spoon Network
           </span>
         </Link>
@@ -166,7 +166,7 @@ export default function RegisterPage() {
         </p>
       </div>
 
-      <div className="mt-6 sm:mt-8 w-full max-w-md mx-auto">
+      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-[#0A0E1A] border border-white/10 rounded-2xl p-6 sm:p-8 shadow-2xl backdrop-blur-xl space-y-6">
           {/* Error Banner */}
           {errorMessage && (

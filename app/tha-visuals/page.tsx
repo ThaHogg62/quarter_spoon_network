@@ -140,15 +140,14 @@ export default function ThaVisualsPage() {
       {/* ================================================================ */}
       {/* TOP NAVIGATION                                                   */}
       {/* ================================================================ */}
-      <header className="sticky top-0 z-40 w-full px-4 sm:px-6 py-3.5 sm:py-4 md:px-12 backdrop-blur-xl bg-[#05060A]/85 border-b border-white/10 flex items-center justify-between">
-        <div className="flex items-center space-x-3 sm:space-x-4">
+      <header className="sticky top-0 z-40 w-full px-6 py-4 md:px-12 backdrop-blur-xl bg-[#05060A]/85 border-b border-white/10 flex items-center justify-between">
+        <div className="flex items-center space-x-4">
           <Link
             href="/"
-            className="flex items-center space-x-2 text-xs uppercase tracking-widest text-zinc-400 hover:text-white transition-colors bg-white/5 hover:bg-white/10 border border-white/10 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-full cursor-pointer"
+            className="flex items-center space-x-2 text-xs uppercase tracking-widest text-zinc-400 hover:text-white transition-colors bg-white/5 hover:bg-white/10 border border-white/10 px-3.5 py-2 rounded-full cursor-pointer"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
-            <span className="hidden xs:inline sm:inline">Return to Studio</span>
-            <span className="xs:hidden sm:hidden">Studio</span>
+            <span>Return to Studio</span>
           </Link>
 
           <div className="hidden sm:flex items-center space-x-3 pl-2 border-l border-white/10">
@@ -173,15 +172,15 @@ export default function ThaVisualsPage() {
           </div>
         </div>
 
-        <div className="flex items-center space-x-2 sm:space-x-3">
-          <div className="flex items-center space-x-2 text-[10px] sm:text-[11px] font-mono tracking-wider text-emerald-400 bg-black/60 border border-emerald-500/30 px-3 py-1.5 rounded-full">
+        <div className="flex items-center space-x-3">
+          <div className="flex items-center space-x-2 text-[11px] font-mono tracking-wider text-emerald-400 bg-black/60 border border-emerald-500/30 px-3.5 py-1.5 rounded-full">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
             <span className="hidden sm:inline">BROADCAST VAULT</span>
             <span className="sm:hidden">LIVE</span>
           </div>
 
           {user && (
-            <div className="flex items-center space-x-2 bg-black/70 border border-white/15 px-2.5 py-1 sm:px-3 rounded-full">
+            <div className="flex items-center space-x-2.5 bg-black/70 border border-white/15 px-3 py-1 rounded-full">
               <div className="w-5 h-5 rounded-full bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center text-black font-extrabold text-[9px]">
                 {user.fullName ? user.fullName.charAt(0).toUpperCase() : "U"}
               </div>
@@ -203,15 +202,12 @@ export default function ThaVisualsPage() {
       {/* ================================================================ */}
       {/* MAIN CINEMA THEATER SECTION                                      */}
       {/* ================================================================ */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-12 md:px-12 space-y-8 sm:space-y-12">
+      <main className="max-w-7xl mx-auto px-6 py-8 sm:py-12 md:px-12 space-y-12">
         {/* Title Header */}
         <div className="space-y-3">
-          <div className="inline-flex items-center space-x-2 bg-[#0A192F] border border-blue-400/40 px-3 py-1 rounded-full text-[9px] sm:text-[10px] tracking-wider sm:tracking-[2.5px] uppercase text-cyan-300 shadow-xl max-w-full">
-            <Radio className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
-            <span className="truncate">
-              <span className="sm:hidden">VIDEO VAULT ACCESS</span>
-              <span className="hidden sm:inline">ENTER THA ZONE // VIDEO VAULT ACCESS</span>
-            </span>
+          <div className="inline-flex items-center space-x-2 bg-[#0A192F] border border-blue-400/40 px-3.5 py-1 rounded-full text-[10px] tracking-[2.5px] uppercase text-cyan-300 shadow-xl">
+            <Radio className="w-3.5 h-3.5 text-cyan-400" />
+            <span>ENTER THA ZONE // VIDEO VAULT ACCESS</span>
           </div>
 
           <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight text-white leading-none">
@@ -253,10 +249,10 @@ export default function ThaVisualsPage() {
                 className="absolute inset-0 flex items-center justify-center bg-black/45 backdrop-blur-[1px] cursor-pointer transition-all hover:bg-black/30 z-20"
               >
                 <div className="flex flex-col items-center space-y-3 transform transition-transform group-hover:scale-105">
-                  <div className="w-16 h-16 sm:w-22 sm:h-22 rounded-full bg-cyan-500 hover:bg-cyan-400 text-black flex items-center justify-center shadow-[0_0_50px_rgba(6,182,212,0.6)] transition-all">
-                    <Play className="w-6 h-6 sm:w-9 sm:h-9 fill-current ml-1" />
+                  <div className="w-18 h-18 sm:w-22 sm:h-22 rounded-full bg-cyan-500 hover:bg-cyan-400 text-black flex items-center justify-center shadow-[0_0_50px_rgba(6,182,212,0.6)] transition-all">
+                    <Play className="w-7 h-7 sm:w-9 sm:h-9 fill-current ml-1" />
                   </div>
-                  <span className="text-[11px] sm:text-xs font-mono tracking-[2px] sm:tracking-[3px] uppercase text-cyan-300 bg-black/80 border border-cyan-500/30 px-3.5 py-1.5 rounded-full shadow-lg">
+                  <span className="text-xs font-mono tracking-[3px] uppercase text-cyan-300 bg-black/80 border border-cyan-500/30 px-4 py-1.5 rounded-full shadow-lg">
                     Play Visual
                   </span>
                 </div>
@@ -264,41 +260,41 @@ export default function ThaVisualsPage() {
             )}
 
             {/* In-video Overlay Controls */}
-            <div className="absolute bottom-0 inset-x-0 p-3 sm:p-6 bg-gradient-to-t from-black/90 via-black/40 to-transparent flex items-center justify-between opacity-90 hover:opacity-100 transition-opacity z-30">
-              <div className="flex items-center space-x-2.5 sm:space-x-4 min-w-0 flex-1 mr-2">
+            <div className="absolute bottom-0 inset-x-0 p-4 sm:p-6 bg-gradient-to-t from-black/90 via-black/40 to-transparent flex items-center justify-between opacity-90 hover:opacity-100 transition-opacity z-30">
+              <div className="flex items-center space-x-4">
                 <button
                   onClick={togglePlay}
-                  className="p-2 sm:p-3 rounded-xl bg-white text-black hover:bg-zinc-200 transition-colors shadow-xl cursor-pointer shrink-0"
+                  className="p-3 rounded-xl bg-white text-black hover:bg-zinc-200 transition-colors shadow-xl cursor-pointer"
                   title={isPlaying ? "Pause" : "Play"}
                 >
-                  {isPlaying ? <Pause className="w-3.5 h-3.5 sm:w-4 sm:h-4" /> : <Play className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-black" />}
+                  {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4 fill-black" />}
                 </button>
 
-                <div className="min-w-0 flex-1">
-                  <h3 className="font-extrabold text-xs sm:text-base tracking-wider uppercase text-white truncate">
+                <div>
+                  <h3 className="font-extrabold text-sm sm:text-base tracking-wider uppercase text-white">
                     {activeVideo.title}
                   </h3>
-                  <span className="text-[9px] sm:text-xs font-mono text-cyan-400 tracking-widest truncate block">
+                  <span className="text-[10px] sm:text-xs font-mono text-cyan-400 tracking-widest">
                     {activeVideo.category} • {activeVideo.duration}
                   </span>
                 </div>
               </div>
 
-              <div className="flex items-center space-x-1.5 sm:space-x-2 shrink-0">
+              <div className="flex items-center space-x-2">
                 <button
                   onClick={toggleMute}
-                  className="p-2 sm:p-2.5 rounded-xl bg-black/60 backdrop-blur-md border border-white/20 text-white hover:bg-white/10 transition-colors cursor-pointer"
+                  className="p-2.5 rounded-xl bg-black/60 backdrop-blur-md border border-white/20 text-white hover:bg-white/10 transition-colors cursor-pointer"
                   title={isMuted ? "Unmute" : "Mute"}
                 >
-                  {isMuted ? <VolumeX className="w-3.5 h-3.5 sm:w-4 sm:h-4" /> : <Volume2 className="w-3.5 h-3.5 sm:w-4 sm:h-4" />}
+                  {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
                 </button>
 
                 <button
                   onClick={toggleFullscreen}
-                  className="p-2 sm:p-2.5 rounded-xl bg-black/60 backdrop-blur-md border border-white/20 text-white hover:bg-white/10 transition-colors cursor-pointer"
+                  className="p-2.5 rounded-xl bg-black/60 backdrop-blur-md border border-white/20 text-white hover:bg-white/10 transition-colors cursor-pointer"
                   title="Fullscreen"
                 >
-                  <Maximize2 className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                  <Maximize2 className="w-4 h-4" />
                 </button>
               </div>
             </div>
@@ -347,7 +343,7 @@ export default function ThaVisualsPage() {
               </p>
             </div>
 
-            <div className="flex flex-wrap items-center gap-2 text-xs font-mono">
+            <div className="flex items-center space-x-2 text-xs font-mono">
               {["ALL", "WEST FRESNO", "YOUTUBE", "ORIGINAL FILMS"].map((cat) => (
                 <button
                   key={cat}

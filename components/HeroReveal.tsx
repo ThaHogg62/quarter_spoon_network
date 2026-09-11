@@ -170,7 +170,7 @@ export default function HeroReveal() {
       onPointerMove={handlePointerMove}
       onPointerEnter={handlePointerEnter}
       onPointerLeave={handlePointerLeave}
-      className="relative w-full h-screen h-[100dvh] min-h-[520px] bg-black overflow-hidden select-none cursor-crosshair max-w-full"
+      className="relative w-screen h-screen bg-black overflow-hidden select-none cursor-crosshair"
     >
       {/* ================================================================ */}
       {/* LAYER 0: BASE HERO IMAGE                                         */}
@@ -235,15 +235,12 @@ export default function HeroReveal() {
       {/* LAYER 2: HERO TEXT & CONTROLS (z-30, above reveal layer)        */}
       {/* Positioned on far left edge, leaving the console open            */}
       {/* ================================================================ */}
-      <div className="absolute left-4 sm:left-10 md:left-14 bottom-6 sm:bottom-12 z-30 max-w-[calc(100vw-2rem)] sm:max-w-md pointer-events-auto pr-2">
-        <div className="space-y-2.5 sm:space-y-4">
+      <div className="absolute left-6 sm:left-10 md:left-14 bottom-8 sm:bottom-12 z-30 max-w-sm sm:max-w-md pointer-events-auto">
+        <div className="space-y-3 sm:space-y-4">
           {/* Tag */}
-          <div className="inline-flex items-center space-x-2 backdrop-blur-md bg-black/60 border border-amber-500/40 px-3 py-1 rounded-full text-[9px] sm:text-[11px] uppercase tracking-wider sm:tracking-[2.5px] text-amber-300 shadow-xl max-w-full">
-            <Sparkles className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-            <span className="truncate">
-              <span className="sm:hidden">QSN • IMMERSIVE VISUALS</span>
-              <span className="hidden sm:inline">QUARTER SPOON NETWORK • IMMERSIVE VISUAL EXPERIENCE</span>
-            </span>
+          <div className="inline-flex items-center space-x-2 backdrop-blur-md bg-black/60 border border-amber-500/40 px-3.5 py-1 rounded-full text-[10px] sm:text-[11px] uppercase tracking-[2.5px] text-amber-300 shadow-xl">
+            <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+            <span>QUARTER SPOON NETWORK • IMMERSIVE VISUAL EXPERIENCE</span>
           </div>
 
           {/* Heading */}
@@ -267,7 +264,7 @@ export default function HeroReveal() {
       {/* Replaces Hogg model, retaining all 3D cursor-tracking movements  */}
       {/* ================================================================ */}
       <div
-        className="absolute right-4 sm:right-8 md:right-14 lg:right-20 top-16 sm:top-auto sm:bottom-16 md:bottom-20 z-25 pointer-events-none select-none"
+        className="absolute right-4 sm:right-8 md:right-14 lg:right-20 bottom-10 sm:bottom-16 md:bottom-20 z-25 pointer-events-none select-none"
         style={{
           perspective: "1000px",
         }}
