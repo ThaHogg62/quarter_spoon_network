@@ -88,10 +88,13 @@ export default function VideoTransition({
       </div>
 
       {/* Bottom Transitioning Badge */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-50 pointer-events-none">
-        <div className="flex items-center space-x-2 bg-black/70 backdrop-blur-md border border-cyan-500/40 px-4 py-1.5 rounded-full text-[11px] font-mono tracking-[3px] text-cyan-300 shadow-2xl">
-          <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
-          <span>ENTERING THA ZONE // CONNECTING TO THA VISUALS</span>
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-50 pointer-events-none max-w-[90vw] px-2">
+        <div className="flex items-center justify-center space-x-2 bg-black/70 backdrop-blur-md border border-cyan-500/40 px-3.5 py-1.5 rounded-full text-[10px] sm:text-[11px] font-mono tracking-wider sm:tracking-[3px] text-cyan-300 shadow-2xl max-w-full">
+          <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping shrink-0" />
+          <span className="truncate">
+            <span className="sm:hidden">CONNECTING TO THA VISUALS...</span>
+            <span className="hidden sm:inline">ENTERING THA ZONE // CONNECTING TO THA VISUALS</span>
+          </span>
         </div>
       </div>
     </div>

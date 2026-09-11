@@ -29,14 +29,14 @@ export default function CinematicStorySection() {
       const rawProgress = currentScroll / totalScroll;
       const progress = Math.max(0, Math.min(1, rawProgress));
 
-      const vw = window.innerWidth;
+      const vw = Math.min(window.innerWidth, document.documentElement.clientWidth || window.innerWidth);
       const vh = window.innerHeight;
 
       // ================================================================
       // 1. INITIAL STATE: STRICT 9:16 VERTICAL PORTRAIT
       // ================================================================
-      const initialW = Math.min(340, vw * 0.72);
-      const initialH = initialW * (16 / 9);
+      const initialW = Math.min(280, Math.max(160, vw * 0.70));
+      const initialH = Math.min(initialW * (16 / 9), vh * 0.58);
 
       // ================================================================
       // 2. FULLY OPENED STATE: STRICT 16:9 ASPECT RATIO
@@ -44,8 +44,8 @@ export default function CinematicStorySection() {
       // ================================================================
       const TARGET_RATIO = 16 / 9;
 
-      const maxAvailableH = Math.min(vh - 48, vh * 0.90);
-      const maxAvailableW = Math.min(vw - 32, maxAvailableH * TARGET_RATIO);
+      const maxAvailableH = Math.min(vh - 48, vh * 0.88);
+      const maxAvailableW = Math.min(vw - 24, maxAvailableH * TARGET_RATIO);
 
       let finalW = maxAvailableW;
       let finalH = finalW / TARGET_RATIO;
@@ -178,10 +178,10 @@ export default function CinematicStorySection() {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full h-[320vh] bg-black text-white selection:bg-cyan-500 selection:text-black"
+      className="relative w-full max-w-full h-[320vh] bg-black text-white selection:bg-cyan-500 selection:text-black overflow-hidden"
     >
       {/* Sticky full-viewport frame that holds the interactive gallery canvas */}
-      <div className="sticky top-0 w-full h-screen overflow-hidden flex items-center justify-center bg-black">
+      <div className="sticky top-0 w-full max-w-full h-screen h-[100dvh] overflow-hidden flex items-center justify-center bg-black">
         {/* Deep pure black canvas backdrop */}
         <div className="absolute inset-0 bg-black pointer-events-none" />
 
@@ -204,10 +204,10 @@ export default function CinematicStorySection() {
           ref={(el) => {
             textRefs.current[0] = el;
           }}
-          className="absolute top-12 left-6 sm:left-12 lg:left-20 z-20 pointer-events-none will-change-transform"
+          className="absolute top-8 sm:top-12 left-4 sm:left-12 lg:left-20 z-20 pointer-events-none will-change-transform max-w-[calc(100vw-2rem)]"
         >
-          <div className="inline-flex items-center space-x-2 bg-black/70 backdrop-blur-md border border-cyan-500/30 px-3.5 py-1.5 rounded-full text-[10px] tracking-[3px] uppercase text-cyan-300 shadow-2xl">
-            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
+          <div className="inline-flex items-center space-x-2 bg-black/70 backdrop-blur-md border border-cyan-500/30 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full text-[9px] sm:text-[10px] tracking-wider sm:tracking-[3px] uppercase text-cyan-300 shadow-2xl">
+            <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-cyan-400 animate-ping" />
             <span className="font-mono">EXHIBITION 01 // FREQUENCY</span>
           </div>
         </div>
@@ -217,12 +217,12 @@ export default function CinematicStorySection() {
           ref={(el) => {
             textRefs.current[1] = el;
           }}
-          className="absolute left-6 sm:left-12 lg:left-20 top-28 sm:top-36 z-20 max-w-[260px] sm:max-w-xs pointer-events-none will-change-transform"
+          className="absolute left-4 sm:left-12 lg:left-20 top-20 sm:top-36 z-20 max-w-[200px] sm:max-w-xs pointer-events-none will-change-transform"
         >
-          <span className="block font-mono text-[10px] uppercase tracking-[4px] text-amber-400 mb-1">
+          <span className="block font-mono text-[9px] sm:text-[10px] uppercase tracking-[2px] sm:tracking-[4px] text-amber-400 mb-1">
             Q.S.N ARCHIVE SPECIMEN
           </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tight leading-[0.95] text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)]">
+          <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tight leading-[0.95] text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)]">
             Tha <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-sky-300 to-indigo-400">
               Visuals
@@ -230,12 +230,12 @@ export default function CinematicStorySection() {
           </h2>
         </div>
 
-        {/* 2: Left Technical Manifesto */}
+        {/* 2: Left Technical Manifesto - desktop only */}
         <div
           ref={(el) => {
             textRefs.current[2] = el;
           }}
-          className="absolute left-6 sm:left-12 lg:left-20 bottom-24 sm:bottom-32 z-20 max-w-[240px] sm:max-w-xs pointer-events-none will-change-transform"
+          className="absolute left-6 sm:left-12 lg:left-20 bottom-24 sm:bottom-32 z-20 max-w-[240px] sm:max-w-xs pointer-events-none will-change-transform hidden md:block"
         >
           <div className="border-l-2 border-amber-500/60 pl-3.5 space-y-1.5">
             <p className="text-[11px] sm:text-xs text-zinc-300 font-light leading-relaxed">
@@ -248,12 +248,12 @@ export default function CinematicStorySection() {
           </div>
         </div>
 
-        {/* 3: Top-Right Archival Stamp */}
+        {/* 3: Top-Right Archival Stamp - desktop only */}
         <div
           ref={(el) => {
             textRefs.current[3] = el;
           }}
-          className="absolute top-12 right-6 sm:right-12 lg:right-24 z-20 pointer-events-none will-change-transform"
+          className="absolute top-12 right-6 sm:right-12 lg:right-24 z-20 pointer-events-none will-change-transform hidden md:block"
         >
           <div className="flex flex-col items-end text-right font-mono text-[10px] text-zinc-400 space-y-0.5">
             <div className="flex items-center space-x-1 text-emerald-400">
@@ -264,12 +264,12 @@ export default function CinematicStorySection() {
           </div>
         </div>
 
-        {/* 4: Right Holographic Telemetry Badge */}
+        {/* 4: Right Holographic Telemetry Badge - desktop only */}
         <div
           ref={(el) => {
             textRefs.current[4] = el;
           }}
-          className="absolute right-6 sm:right-12 lg:right-20 top-32 sm:top-40 z-20 max-w-[220px] sm:max-w-xs pointer-events-none will-change-transform text-right"
+          className="absolute right-6 sm:right-12 lg:right-20 top-32 sm:top-40 z-20 max-w-[220px] sm:max-w-xs pointer-events-none will-change-transform text-right hidden md:block"
         >
           <div className="bg-black/60 backdrop-blur-md border border-white/10 p-3 rounded-xl shadow-2xl inline-block text-left">
             <div className="flex items-center justify-between space-x-3 mb-1">
@@ -284,12 +284,12 @@ export default function CinematicStorySection() {
           </div>
         </div>
 
-        {/* 5: Right Rotated Editorial Callout */}
+        {/* 5: Right Rotated Editorial Callout - desktop only */}
         <div
           ref={(el) => {
             textRefs.current[5] = el;
           }}
-          className="absolute right-6 sm:right-12 lg:right-20 bottom-36 z-20 pointer-events-none will-change-transform hidden sm:block"
+          className="absolute right-6 sm:right-12 lg:right-20 bottom-36 z-20 pointer-events-none will-change-transform hidden lg:block"
         >
           <div className="flex items-center space-x-3 text-zinc-400 font-mono text-[10px] rotate-2">
             <span className="w-8 h-[1px] bg-amber-500/50" />
@@ -297,12 +297,12 @@ export default function CinematicStorySection() {
           </div>
         </div>
 
-        {/* 6: Bottom-Left Coordinate Stamp */}
+        {/* 6: Bottom-Left Coordinate Stamp - desktop only */}
         <div
           ref={(el) => {
             textRefs.current[6] = el;
           }}
-          className="absolute left-6 sm:left-12 lg:left-20 bottom-8 z-20 pointer-events-none will-change-transform"
+          className="absolute left-6 sm:left-12 lg:left-20 bottom-8 z-20 pointer-events-none will-change-transform hidden sm:block"
         >
           <div className="flex items-center space-x-2 text-[10px] font-mono text-zinc-500 tracking-wider">
             <Compass className="w-3.5 h-3.5 text-zinc-400" />
@@ -310,12 +310,12 @@ export default function CinematicStorySection() {
           </div>
         </div>
 
-        {/* 7: Bottom-Right Production Index */}
+        {/* 7: Bottom-Right Production Index - desktop only */}
         <div
           ref={(el) => {
             textRefs.current[7] = el;
           }}
-          className="absolute right-6 sm:right-12 lg:right-20 bottom-8 z-20 pointer-events-none will-change-transform text-right"
+          className="absolute right-6 sm:right-12 lg:right-20 bottom-8 z-20 pointer-events-none will-change-transform text-right hidden sm:block"
         >
           <span className="font-mono text-[9px] uppercase tracking-[3px] text-zinc-500">
             CINEMATIC CANVAS 02 / EXPANSION STATE
@@ -353,7 +353,7 @@ export default function CinematicStorySection() {
           ref={scrollIndicatorRef}
           className="absolute bottom-6 z-30 flex flex-col items-center space-y-1.5 pointer-events-none will-change-transform"
         >
-          <span className="text-[10px] font-mono tracking-[4px] uppercase text-zinc-400">
+          <span className="text-[9px] sm:text-[10px] font-mono tracking-[3px] sm:tracking-[4px] uppercase text-zinc-400">
             Scroll to Expand Canvas
           </span>
           <div className="w-4 h-7 border border-white/30 rounded-full flex justify-center p-1">
@@ -372,15 +372,15 @@ export default function CinematicStorySection() {
             visibility: "hidden",
             pointerEvents: "none",
           }}
-          className="absolute bottom-8 left-6 sm:bottom-12 sm:left-12 z-40 will-change-transform"
+          className="absolute bottom-6 left-4 sm:bottom-12 sm:left-12 z-40 will-change-transform max-w-[calc(100vw-2rem)]"
         >
           <button
             onClick={() => setIsTransitioning(true)}
-            className="flex items-center space-x-3 bg-[#0B1A30] hover:bg-[#122A4F] text-white border border-blue-400/50 hover:border-cyan-400 font-black text-xs uppercase tracking-[2.5px] px-7 py-3.5 rounded-xl shadow-[0_4px_30px_rgba(11,26,48,0.95)] transition-all active:scale-95 cursor-pointer group"
+            className="flex items-center space-x-2.5 sm:space-x-3 bg-[#0B1A30] hover:bg-[#122A4F] text-white border border-blue-400/50 hover:border-cyan-400 font-black text-xs uppercase tracking-[2px] sm:tracking-[2.5px] px-5 sm:px-7 py-3 sm:py-3.5 rounded-xl shadow-[0_4px_30px_rgba(11,26,48,0.95)] transition-all active:scale-95 cursor-pointer group"
           >
-            <Radio className="w-4 h-4 text-cyan-400 group-hover:animate-pulse" />
+            <Radio className="w-4 h-4 text-cyan-400 group-hover:animate-pulse shrink-0" />
             <span>Enter Tha Zone</span>
-            <ArrowRight className="w-4 h-4 text-white group-hover:translate-x-1.5 transition-transform" />
+            <ArrowRight className="w-4 h-4 text-white group-hover:translate-x-1.5 transition-transform shrink-0" />
           </button>
         </div>
 
