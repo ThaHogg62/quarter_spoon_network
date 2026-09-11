@@ -343,7 +343,7 @@ export default function ThaVisualsPage() {
               </p>
             </div>
 
-            <div className="flex items-center space-x-2 text-xs font-mono">
+            <div className="flex flex-wrap items-center gap-2 text-xs font-mono">
               {["ALL", "WEST FRESNO", "YOUTUBE", "ORIGINAL FILMS"].map((cat) => (
                 <button
                   key={cat}
