@@ -95,7 +95,26 @@ export default function ThaVisualsPage() {
   const [activeFilter, setActiveFilter] = useState("ALL");
   const videoPlayerRef = useRef<HTMLVideoElement | null>(null);
 
+  const recordPlayEvent = (item: VideoItem) => {
+    try {
+      fetch("/api/video/play", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          videoId: item.id,
+          videoTitle: item.title,
+          userEmail: user?.email,
+          userName: user?.fullName,
+          category: item.category,
+        }),
+      }).catch((e) => console.warn("Video play ping error:", e));
+    } catch {
+      // Non-blocking
+    }
+  };
+
   const handleSelectVideo = (item: VideoItem) => {
+    recordPlayEvent(item);
     if (item.externalUrl) {
       window.open(item.externalUrl, "_blank", "noopener,noreferrer");
       return;
@@ -112,6 +131,7 @@ export default function ThaVisualsPage() {
   const togglePlay = () => {
     if (!videoPlayerRef.current) return;
     if (videoPlayerRef.current.paused) {
+      recordPlayEvent(activeVideo);
       videoPlayerRef.current.play();
       setIsPlaying(true);
     } else {

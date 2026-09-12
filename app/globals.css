@@ -24,3 +24,29 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+@keyframes neon-trace {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.neon-white-beam {
+  position: absolute;
+  inset: -150%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    transparent 270deg,
+    rgba(255, 255, 255, 0.3) 310deg,
+    rgba(255, 255, 255, 0.8) 335deg,
+    #ffffff 350deg,
+    #ffffff 360deg
+  );
+  animation: neon-trace 3s linear infinite;
+  filter: drop-shadow(0 0 8px #ffffff) drop-shadow(0 0 16px rgba(255, 255, 255, 0.9));
+  pointer-events: none;
+}

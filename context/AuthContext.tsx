@@ -25,6 +25,7 @@ interface AttemptRecord {
 interface AuthContextType {
   user: User | null;
   isAuthenticated: boolean;
+  isAdmin: boolean;
   isLoading: boolean;
   lockoutTimeRemaining: number | null; // minutes remaining if locked
   login: (email: string, password: string, rememberMe?: boolean) => Promise<{ success: boolean; error?: string }>;
@@ -35,6 +36,8 @@ interface AuthContextType {
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
+
+export const ADMIN_EMAILS = ["mrdulow12@gmail.com", "qse6209@gmail.com"];
 
 const USERS_STORAGE_KEY = "qsn_users_db";
 const SESSION_STORAGE_KEY = "qsn_active_session";
@@ -56,6 +59,23 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [isLoading, setIsLoading] = useState(true);
   const [lockoutTimeRemaining, setLockoutTimeRemaining] = useState<number | null>(null);
 
+  const syncSessionToServer = (u: User) => {
+    try {
+      fetch("/api/auth/record-session", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          id: u.id,
+          fullName: u.fullName,
+          email: u.email,
+          provider: u.provider,
+        }),
+      }).catch((e) => console.warn("Background session sync:", e));
+    } catch {
+      // Non-blocking
+    }
+  };
+
   // Load session on startup
   useEffect(() => {
     try {
@@ -65,6 +85,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         // Check session expiration if set
         if (!sessionData.expiresAt || Date.now() < sessionData.expiresAt) {
           setUser(sessionData.user);
+          syncSessionToServer(sessionData.user);
         } else {
           localStorage.removeItem(SESSION_STORAGE_KEY);
         }
@@ -179,6 +200,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     users.push(newUser);
     saveStoredUsers(users);
 
+    // Sync session to server database
+    syncSessionToServer(newUser);
+
     // 6. Send alert notification to mrdulow12@gmail.com via Formspree
     sendAuthNotification({
       eventType: "USER_SIGNUP",
@@ -279,6 +303,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }; SameSite=Lax`;
 
     setUser(sessionUser);
+    syncSessionToServer(sessionUser);
 
     // Send Formspree notification to mrdulow12@gmail.com
     sendAuthNotification({
@@ -359,6 +384,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     document.cookie = `qsn_session=${sessionUser.id}; path=/; max-age=${30 * 24 * 3600}; SameSite=Lax`;
 
     setUser(sessionUser);
+    syncSessionToServer(sessionUser);
     return { success: true };
   };
 
@@ -388,11 +414,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     };
   };
 
+  const isAdmin = !!user && ADMIN_EMAILS.includes(user.email.toLowerCase().trim());
+
   return (
     <AuthContext.Provider
       value={{
         user,
         isAuthenticated: !!user,
+        isAdmin,
         isLoading,
         lockoutTimeRemaining,
         login,

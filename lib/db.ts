@@ -1,0 +1,588 @@
+import fs from "fs";
+import path from "path";
+
+export interface DBUser {
+  id: string;
+  fullName: string;
+  email: string;
+  provider: "email" | "google";
+  createdAt: string;
+  lastLoginAt: string;
+  role?: "admin" | "member";
+}
+
+export interface DBSubscriber {
+  id: string;
+  email: string;
+  fullName: string;
+  subscribedAt: string;
+  source: string;
+  status: "active" | "unsubscribed";
+}
+
+export interface DBLoginLog {
+  id: string;
+  userId?: string;
+  email: string;
+  fullName: string;
+  provider: string;
+  timestamp: string;
+}
+
+export interface DBEmailDispatch {
+  id: string;
+  type: "thank_you" | "invite" | "blast" | "preview" | "digital_workflow" | "direct_reply";
+  recipientEmail: string;
+  recipientName: string;
+  subject: string;
+  bodyText: string;
+  sentAt: string;
+  status: "sent" | "preview" | "queued";
+}
+
+export interface DBVideoPlay {
+  id: string;
+  videoId: string;
+  videoTitle: string;
+  userEmail: string;
+  userName: string;
+  isSubscriber: boolean;
+  timestamp: string;
+}
+
+export interface DBVideoStat {
+  videoId: string;
+  videoTitle: string;
+  category: string;
+  totalPlays: number;
+  subscriberPlays: number;
+  nonSubscriberPlays: number;
+  lastPlayedAt: string;
+}
+
+export interface DBGameInquiry {
+  id: string;
+  fullName: string;
+  email: string;
+  category: string;
+  question: string;
+  timestamp: string;
+  reply?: {
+    text: string;
+    repliedAt: string;
+    adminEmail: string;
+    subject?: string;
+  };
+  status?: "pending" | "replied";
+}
+
+export interface NetworkDBData {
+  users: DBUser[];
+  subscribers: DBSubscriber[];
+  loginLogs: DBLoginLog[];
+  emailDispatches: DBEmailDispatch[];
+  videoPlays?: DBVideoPlay[];
+  videoStats?: Record<string, DBVideoStat>;
+  gameInquiries?: DBGameInquiry[];
+}
+
+const DATA_DIR = path.join(process.cwd(), "data");
+const DB_FILE = path.join(DATA_DIR, "network_db.json");
+
+const ADMIN_EMAILS = ["mrdulow12@gmail.com", "qse6209@gmail.com"];
+
+export const BASE_VIDEO_STATS: Record<string, DBVideoStat> = {
+  "in-every-section": {
+    videoId: "in-every-section",
+    videoTitle: "IN EVERY SECTION",
+    category: "WEST FRESNO",
+    totalPlays: 48,
+    subscriberPlays: 34,
+    nonSubscriberPlays: 14,
+    lastPlayedAt: new Date(Date.now() - 1000 * 60 * 12).toISOString(),
+  },
+  "tha-hogg-channel": {
+    videoId: "tha-hogg-channel",
+    videoTitle: "THA HOGG // VISUAL CREATIONS",
+    category: "OFFICIAL YOUTUBE",
+    totalPlays: 32,
+    subscriberPlays: 22,
+    nonSubscriberPlays: 10,
+    lastPlayedAt: new Date(Date.now() - 1000 * 60 * 45).toISOString(),
+  },
+  "tha-game-should-be-told": {
+    videoId: "tha-game-should-be-told",
+    videoTitle: "THA GAME SHOULD BE TOLD",
+    category: "A.I. TUTORIAL",
+    totalPlays: 27,
+    subscriberPlays: 19,
+    nonSubscriberPlays: 8,
+    lastPlayedAt: new Date(Date.now() - 1000 * 60 * 80).toISOString(),
+  },
+  "scene-of-screams": {
+    videoId: "scene-of-screams",
+    videoTitle: "SCENE OF SCREAMS",
+    category: "ORIGINAL FILMS",
+    totalPlays: 19,
+    subscriberPlays: 15,
+    nonSubscriberPlays: 4,
+    lastPlayedAt: new Date(Date.now() - 1000 * 60 * 150).toISOString(),
+  },
+};
+
+// Initial baseline seed data to demonstrate live tables right out of the box
+const DEFAULT_DATA: NetworkDBData = {
+  users: [
+    {
+      id: "usr_admin_dulow",
+      fullName: "Tha Hogg",
+      email: "mrdulow12@gmail.com",
+      provider: "google",
+      createdAt: "2026-08-01T12:00:00.000Z",
+      lastLoginAt: new Date().toISOString(),
+      role: "admin",
+    },
+    {
+      id: "usr_admin_qse",
+      fullName: "Quarter Spoon Executive",
+      email: "qse6209@gmail.com",
+      provider: "email",
+      createdAt: "2026-08-10T15:30:00.000Z",
+      lastLoginAt: new Date(Date.now() - 1000 * 60 * 45).toISOString(),
+      role: "admin",
+    },
+    {
+      id: "usr_member_1",
+      fullName: "Marcus Vance",
+      email: "m.vance.westfresno@gmail.com",
+      provider: "email",
+      createdAt: "2026-09-02T18:20:00.000Z",
+      lastLoginAt: new Date(Date.now() - 1000 * 60 * 12).toISOString(),
+      role: "member",
+    },
+    {
+      id: "usr_member_2",
+      fullName: "Darnell Jenkins",
+      email: "djenkins559@yahoo.com",
+      provider: "google",
+      createdAt: "2026-09-05T09:14:00.000Z",
+      lastLoginAt: new Date(Date.now() - 1000 * 60 * 180).toISOString(),
+      role: "member",
+    },
+    {
+      id: "usr_member_3",
+      fullName: "Tiana Brooks",
+      email: "tianabrooks.creative@gmail.com",
+      provider: "email",
+      createdAt: "2026-09-09T22:45:00.000Z",
+      lastLoginAt: new Date(Date.now() - 1000 * 60 * 20).toISOString(),
+      role: "member",
+    },
+    {
+      id: "usr_member_4",
+      fullName: "Devon Reed",
+      email: "reed.visuals@gmail.com",
+      provider: "google",
+      createdAt: "2026-09-11T14:10:00.000Z",
+      lastLoginAt: new Date(Date.now() - 1000 * 60 * 5).toISOString(),
+      role: "member",
+    },
+  ],
+  subscribers: [
+    {
+      id: "sub_1",
+      email: "mrdulow12@gmail.com",
+      fullName: "Tha Hogg",
+      subscribedAt: "2026-08-01T12:05:00.000Z",
+      source: "Founding List",
+      status: "active",
+    },
+    {
+      id: "sub_2",
+      email: "qse6209@gmail.com",
+      fullName: "Quarter Spoon Executive",
+      subscribedAt: "2026-08-10T15:35:00.000Z",
+      source: "Founding List",
+      status: "active",
+    },
+    {
+      id: "sub_3",
+      email: "m.vance.westfresno@gmail.com",
+      fullName: "Marcus Vance",
+      subscribedAt: "2026-09-02T18:25:00.000Z",
+      source: "Tha Network Modal",
+      status: "active",
+    },
+  ],
+  loginLogs: [
+    {
+      id: "log_init_1",
+      userId: "usr_member_4",
+      email: "reed.visuals@gmail.com",
+      fullName: "Devon Reed",
+      provider: "Google OAuth",
+      timestamp: new Date(Date.now() - 1000 * 60 * 5).toISOString(),
+    },
+    {
+      id: "log_init_2",
+      userId: "usr_member_1",
+      email: "m.vance.westfresno@gmail.com",
+      fullName: "Marcus Vance",
+      provider: "Password",
+      timestamp: new Date(Date.now() - 1000 * 60 * 12).toISOString(),
+    },
+    {
+      id: "log_init_3",
+      userId: "usr_member_3",
+      email: "tianabrooks.creative@gmail.com",
+      fullName: "Tiana Brooks",
+      provider: "Password",
+      timestamp: new Date(Date.now() - 1000 * 60 * 20).toISOString(),
+    },
+  ],
+  emailDispatches: [
+    {
+      id: "disp_init_1",
+      type: "thank_you",
+      recipientEmail: "m.vance.westfresno@gmail.com",
+      recipientName: "Marcus Vance",
+      subject: "Welcome to Tha Network // You're Locked In",
+      bodyText: "Appreciate you locking in with Tha Network...",
+      sentAt: "2026-09-02T18:25:00.000Z",
+      status: "sent",
+    },
+  ],
+  videoStats: { ...BASE_VIDEO_STATS },
+  videoPlays: [],
+  gameInquiries: [],
+};
+
+function ensureDb(): NetworkDBData {
+  try {
+    if (!fs.existsSync(DATA_DIR)) {
+      fs.mkdirSync(DATA_DIR, { recursive: true });
+    }
+    if (!fs.existsSync(DB_FILE)) {
+      fs.writeFileSync(DB_FILE, JSON.stringify(DEFAULT_DATA, null, 2), "utf8");
+      return DEFAULT_DATA;
+    }
+    const content = fs.readFileSync(DB_FILE, "utf8");
+    const parsed: NetworkDBData = JSON.parse(content);
+    let dirty = false;
+    if (!parsed.videoStats) {
+      parsed.videoStats = {};
+      dirty = true;
+    }
+    for (const [k, v] of Object.entries(BASE_VIDEO_STATS)) {
+      if (!parsed.videoStats[k]) {
+        parsed.videoStats[k] = { ...v };
+        dirty = true;
+      }
+    }
+    if (!parsed.videoPlays) {
+      parsed.videoPlays = [];
+      dirty = true;
+    }
+    if (!parsed.gameInquiries) {
+      parsed.gameInquiries = [];
+      dirty = true;
+    }
+    if (dirty) {
+      try {
+        fs.writeFileSync(DB_FILE, JSON.stringify(parsed, null, 2), "utf8");
+      } catch {}
+    }
+    return parsed;
+  } catch (err) {
+    console.error("Error reading database, falling back to in-memory:", err);
+    return DEFAULT_DATA;
+  }
+}
+
+function writeDb(data: NetworkDBData): boolean {
+  try {
+    if (!fs.existsSync(DATA_DIR)) {
+      fs.mkdirSync(DATA_DIR, { recursive: true });
+    }
+    fs.writeFileSync(DB_FILE, JSON.stringify(data, null, 2), "utf8");
+    return true;
+  } catch (err) {
+    console.error("Error writing database:", err);
+    return false;
+  }
+}
+
+export const db = {
+  getAdminEmails(): string[] {
+    return ADMIN_EMAILS;
+  },
+
+  isAdmin(email: string): boolean {
+    if (!email) return false;
+    return ADMIN_EMAILS.includes(email.toLowerCase().trim());
+  },
+
+  getData(): NetworkDBData {
+    return ensureDb();
+  },
+
+  // Users management
+  getUsers(): DBUser[] {
+    const data = ensureDb();
+    return data.users;
+  },
+
+  recordUserLogin(payload: {
+    id?: string;
+    fullName: string;
+    email: string;
+    provider: "email" | "google";
+  }): DBUser {
+    const data = ensureDb();
+    const normalizedEmail = payload.email.toLowerCase().trim();
+    const now = new Date().toISOString();
+
+    let user = data.users.find((u) => u.email.toLowerCase() === normalizedEmail);
+
+    if (!user) {
+      user = {
+        id: payload.id || `usr_${Math.random().toString(36).substring(2, 9)}`,
+        fullName: payload.fullName || "Quarter Spoon Member",
+        email: normalizedEmail,
+        provider: payload.provider,
+        createdAt: now,
+        lastLoginAt: now,
+        role: ADMIN_EMAILS.includes(normalizedEmail) ? "admin" : "member",
+      };
+      data.users.push(user);
+    } else {
+      user.lastLoginAt = now;
+      if (payload.fullName && payload.fullName !== "Quarter Spoon Member") {
+        user.fullName = payload.fullName;
+      }
+      user.provider = payload.provider;
+    }
+
+    // Add to login log
+    const logEntry: DBLoginLog = {
+      id: `log_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`,
+      userId: user.id,
+      email: user.email,
+      fullName: user.fullName,
+      provider: payload.provider === "google" ? "Google OAuth" : "Password",
+      timestamp: now,
+    };
+
+    // Prepend to logs, keep last 100
+    data.loginLogs = [logEntry, ...data.loginLogs].slice(0, 100);
+
+    writeDb(data);
+    return user;
+  },
+
+  // Tha Network Subscribers management
+  getSubscribers(): DBSubscriber[] {
+    const data = ensureDb();
+    return data.subscribers;
+  },
+
+  isSubscribed(email: string): boolean {
+    const data = ensureDb();
+    const normalizedEmail = email.toLowerCase().trim();
+    return data.subscribers.some(
+      (s) => s.email.toLowerCase() === normalizedEmail && s.status === "active"
+    );
+  },
+
+  addSubscriber(payload: {
+    email: string;
+    fullName?: string;
+    source?: string;
+  }): { subscriber: DBSubscriber; alreadySubscribed: boolean } {
+    const data = ensureDb();
+    const normalizedEmail = payload.email.toLowerCase().trim();
+    const existing = data.subscribers.find(
+      (s) => s.email.toLowerCase() === normalizedEmail
+    );
+
+    if (existing) {
+      if (existing.status !== "active") {
+        existing.status = "active";
+        existing.subscribedAt = new Date().toISOString();
+        writeDb(data);
+      }
+      return { subscriber: existing, alreadySubscribed: true };
+    }
+
+    // Lookup user profile if exists to populate full name
+    const existingUser = data.users.find((u) => u.email.toLowerCase() === normalizedEmail);
+    const resolvedName = payload.fullName || existingUser?.fullName || "Tha Network VIP";
+
+    const newSubscriber: DBSubscriber = {
+      id: `sub_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`,
+      email: normalizedEmail,
+      fullName: resolvedName,
+      subscribedAt: new Date().toISOString(),
+      source: payload.source || "Tha Network Web",
+      status: "active",
+    };
+
+    data.subscribers.unshift(newSubscriber);
+    writeDb(data);
+    return { subscriber: newSubscriber, alreadySubscribed: false };
+  },
+
+  removeSubscriber(idOrEmail: string): boolean {
+    const data = ensureDb();
+    const target = idOrEmail.toLowerCase().trim();
+    const item = data.subscribers.find(
+      (s) => s.id === idOrEmail || s.email.toLowerCase() === target
+    );
+    if (!item) return false;
+
+    item.status = "unsubscribed";
+    return writeDb(data);
+  },
+
+  // Non-subscribers helper (registered users who haven't subscribed to Tha Network)
+  getNonSubscribers(): DBUser[] {
+    const data = ensureDb();
+    const subEmailSet = new Set(
+      data.subscribers
+        .filter((s) => s.status === "active")
+        .map((s) => s.email.toLowerCase().trim())
+    );
+
+    return data.users.filter(
+      (user) => !subEmailSet.has(user.email.toLowerCase().trim())
+    );
+  },
+
+  // Email dispatch record
+  recordDispatch(dispatch: Omit<DBEmailDispatch, "id" | "sentAt">): DBEmailDispatch {
+    const data = ensureDb();
+    const entry: DBEmailDispatch = {
+      id: `disp_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`,
+      sentAt: new Date().toISOString(),
+      ...dispatch,
+    };
+
+    data.emailDispatches.unshift(entry);
+    writeDb(data);
+    return entry;
+  },
+
+  getEmailDispatches(): DBEmailDispatch[] {
+    const data = ensureDb();
+    return data.emailDispatches;
+  },
+
+  // Video Play Telemetry
+  recordVideoPlay(payload: {
+    videoId: string;
+    videoTitle: string;
+    userEmail?: string;
+    userName?: string;
+    isSubscriber?: boolean;
+    category?: string;
+  }): { play: DBVideoPlay; stat: DBVideoStat } {
+    const data = ensureDb();
+    if (!data.videoPlays) data.videoPlays = [];
+    if (!data.videoStats) data.videoStats = {};
+
+    const now = new Date().toISOString();
+    const email = (payload.userEmail || "anonymous@member.qsn").toLowerCase().trim();
+    const isSub = payload.isSubscriber ?? db.isSubscribed(email);
+
+    // Record individual play event
+    const play: DBVideoPlay = {
+      id: `play_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`,
+      videoId: payload.videoId,
+      videoTitle: payload.videoTitle,
+      userEmail: email,
+      userName: payload.userName || "Quarter Spoon Member",
+      isSubscriber: isSub,
+      timestamp: now,
+    };
+
+    data.videoPlays.unshift(play);
+    if (data.videoPlays.length > 500) {
+      data.videoPlays = data.videoPlays.slice(0, 500);
+    }
+
+    // Update aggregate counters per video
+    if (!data.videoStats[payload.videoId]) {
+      const base = BASE_VIDEO_STATS[payload.videoId];
+      data.videoStats[payload.videoId] = base
+        ? { ...base }
+        : {
+            videoId: payload.videoId,
+            videoTitle: payload.videoTitle,
+            category: payload.category || "ARCHIVE",
+            totalPlays: 0,
+            subscriberPlays: 0,
+            nonSubscriberPlays: 0,
+            lastPlayedAt: now,
+          };
+    }
+
+    const stat = data.videoStats[payload.videoId];
+    stat.totalPlays += 1;
+    stat.lastPlayedAt = now;
+    if (isSub) {
+      stat.subscriberPlays += 1;
+    } else {
+      stat.nonSubscriberPlays += 1;
+    }
+
+    writeDb(data);
+    return { play, stat };
+  },
+
+  getVideoStats(): DBVideoStat[] {
+    const data = ensureDb();
+    return Object.values(data.videoStats || BASE_VIDEO_STATS);
+  },
+
+  getRecentVideoPlays(limit = 40): DBVideoPlay[] {
+    const data = ensureDb();
+    return (data.videoPlays || []).slice(0, limit);
+  },
+
+  // "Get U Some Game" Question & Inquiry logging
+  recordGameInquiry(inquiry: Omit<DBGameInquiry, "id" | "timestamp">): DBGameInquiry {
+    const data = ensureDb();
+    if (!data.gameInquiries) data.gameInquiries = [];
+
+    const entry: DBGameInquiry = {
+      id: `inq_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`,
+      timestamp: new Date().toISOString(),
+      ...inquiry,
+    };
+
+    data.gameInquiries.unshift(entry);
+    writeDb(data);
+    return entry;
+  },
+
+  getGameInquiries(limit = 50): DBGameInquiry[] {
+    const data = ensureDb();
+    return (data.gameInquiries || []).slice(0, limit);
+  },
+
+  updateInquiryReply(
+    inquiryId: string,
+    reply: { text: string; repliedAt: string; adminEmail: string; subject?: string }
+  ): DBGameInquiry | null {
+    const data = ensureDb();
+    if (!data.gameInquiries) return null;
+
+    const inquiry = data.gameInquiries.find((inq) => inq.id === inquiryId);
+    if (!inquiry) return null;
+
+    inquiry.reply = reply;
+    inquiry.status = "replied";
+    writeDb(data);
+    return inquiry;
+  },
+};
