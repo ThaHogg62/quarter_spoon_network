@@ -80,7 +80,7 @@ interface AdminVideoStat {
   totalPlays: number;
   subscriberPlays: number;
   nonSubscriberPlays: number;
-  lastPlayedAt: string;
+  lastPlayedAt: string | null;
 }
 
 interface AdminVideoPlay {
@@ -1333,10 +1333,16 @@ export default function AdminDashboardPage() {
                         </td>
 
                         <td className="py-4 px-6 text-right font-mono text-zinc-400">
-                          <div>{formatTimeAgo(stat.lastPlayedAt)}</div>
-                          <div className="text-[10px] text-zinc-600">
-                            {formatDateExact(stat.lastPlayedAt)}
-                          </div>
+                          {stat.lastPlayedAt ? (
+                            <>
+                              <div>{formatTimeAgo(stat.lastPlayedAt)}</div>
+                              <div className="text-[10px] text-zinc-600">
+                                {formatDateExact(stat.lastPlayedAt)}
+                              </div>
+                            </>
+                          ) : (
+                            <span className="text-zinc-500 text-[11px]">No plays yet</span>
+                          )}
                         </td>
                       </tr>
                     );
@@ -1347,7 +1353,7 @@ export default function AdminDashboardPage() {
           </div>
 
           {/* Recent Video Plays Real-Time Feed */}
-          {data?.recentVideoPlays && data.recentVideoPlays.length > 0 && (
+          {data?.recentVideoPlays && data.recentVideoPlays.length > 0 ? (
             <div className="bg-black/40 border border-white/10 rounded-xl p-4 space-y-3">
               <div className="flex items-center justify-between">
                 <span className="text-[10px] font-mono tracking-[2px] uppercase text-zinc-400 flex items-center space-x-1.5">
@@ -1384,6 +1390,14 @@ export default function AdminDashboardPage() {
                   </div>
                 ))}
               </div>
+            </div>
+          ) : (
+            <div className="bg-black/30 border border-white/5 rounded-xl p-3.5 flex items-center justify-between text-xs font-mono text-zinc-500">
+              <div className="flex items-center space-x-2">
+                <span className="w-2 h-2 rounded-full bg-purple-400/60" />
+                <span>Real-Time Playback Stream &bull; Live Telemetry Listener Active</span>
+              </div>
+              <span className="text-[11px]">Strict 0 count (no mock plays)</span>
             </div>
           )}
         </div>

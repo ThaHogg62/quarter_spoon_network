@@ -239,7 +239,7 @@ export default function ThaNetworkModal() {
                         type="text"
                         value={fullName}
                         onChange={(e) => setFullName(e.target.value)}
-                        placeholder="e.g. Marcus Vance"
+                        placeholder="e.g. John Smith"
                         className="w-full bg-[#05060A] border border-white/15 focus:border-cyan-400 rounded-xl px-4 py-2.5 text-sm text-white placeholder-zinc-600 focus:outline-none transition-colors"
                       />
                     </div>

@@ -70,7 +70,7 @@ export async function GET(request: Request) {
       metrics: {
         totalUsers: users.length,
         totalSubscribers: subscribers.filter((s) => s.status === "active").length,
-        activeRecently: Math.max(activeRecentlyCount, 1),
+        activeRecently: activeRecentlyCount,
         nonSubscribersCount,
         totalPdfDownloads,
       },

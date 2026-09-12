@@ -17,62 +17,9 @@
       "createdAt": "2026-08-10T15:30:00.000Z",
       "lastLoginAt": "2026-09-12T20:00:16.629Z",
       "role": "admin"
-    },
-    {
-      "id": "usr_member_1",
-      "fullName": "Marcus Vance",
-      "email": "m.vance.westfresno@gmail.com",
-      "provider": "email",
-      "createdAt": "2026-09-02T18:20:00.000Z",
-      "lastLoginAt": "2026-09-12T17:40:10.878Z",
-      "role": "member"
-    },
-    {
-      "id": "usr_member_2",
-      "fullName": "Darnell Jenkins",
-      "email": "djenkins559@yahoo.com",
-      "provider": "google",
-      "createdAt": "2026-09-05T09:14:00.000Z",
-      "lastLoginAt": "2026-09-12T14:52:10.878Z",
-      "role": "member"
-    },
-    {
-      "id": "usr_member_3",
-      "fullName": "Tiana Brooks",
-      "email": "tianabrooks.creative@gmail.com",
-      "provider": "email",
-      "createdAt": "2026-09-09T22:45:00.000Z",
-      "lastLoginAt": "2026-09-12T17:32:10.878Z",
-      "role": "member"
-    },
-    {
-      "id": "usr_member_4",
-      "fullName": "Devon Reed",
-      "email": "reed.visuals@gmail.com",
-      "provider": "google",
-      "createdAt": "2026-09-11T14:10:00.000Z",
-      "lastLoginAt": "2026-09-12T17:47:10.878Z",
-      "role": "member"
-    },
-    {
-      "id": "usr_ymgfhlg",
-      "fullName": "Fan WestFresno",
-      "email": "just_logged_in_fan@gmail.com",
-      "provider": "google",
-      "createdAt": "2026-09-12T17:53:21.276Z",
-      "lastLoginAt": "2026-09-12T17:53:21.276Z",
-      "role": "member"
     }
   ],
   "subscribers": [
-    {
-      "id": "sub_1789235564664_97qmf",
-      "email": "legend.fresno559@gmail.com",
-      "fullName": "Legend Fresno",
-      "subscribedAt": "2026-09-12T17:52:44.664Z",
-      "source": "Automated Test",
-      "status": "active"
-    },
     {
       "id": "sub_1",
       "email": "mrdulow12@gmail.com",
@@ -87,14 +34,6 @@
       "fullName": "Quarter Spoon Executive",
       "subscribedAt": "2026-08-10T15:35:00.000Z",
       "source": "Founding List",
-      "status": "active"
-    },
-    {
-      "id": "sub_3",
-      "email": "m.vance.westfresno@gmail.com",
-      "fullName": "Marcus Vance",
-      "subscribedAt": "2026-09-02T18:25:00.000Z",
-      "source": "Tha Network Modal",
       "status": "active"
     }
   ],
@@ -154,38 +93,6 @@
       "fullName": "Tha Hogg",
       "provider": "Google OAuth",
       "timestamp": "2026-09-12T17:55:59.167Z"
-    },
-    {
-      "id": "log_1789235601276_q66p",
-      "userId": "usr_ymgfhlg",
-      "email": "just_logged_in_fan@gmail.com",
-      "fullName": "Fan WestFresno",
-      "provider": "Google OAuth",
-      "timestamp": "2026-09-12T17:53:21.276Z"
-    },
-    {
-      "id": "log_init_1",
-      "userId": "usr_member_4",
-      "email": "reed.visuals@gmail.com",
-      "fullName": "Devon Reed",
-      "provider": "Google OAuth",
-      "timestamp": "2026-09-12T17:47:10.878Z"
-    },
-    {
-      "id": "log_init_2",
-      "userId": "usr_member_1",
-      "email": "m.vance.westfresno@gmail.com",
-      "fullName": "Marcus Vance",
-      "provider": "Password",
-      "timestamp": "2026-09-12T17:40:10.878Z"
-    },
-    {
-      "id": "log_init_3",
-      "userId": "usr_member_3",
-      "email": "tianabrooks.creative@gmail.com",
-      "fullName": "Tiana Brooks",
-      "provider": "Password",
-      "timestamp": "2026-09-12T17:32:10.878Z"
     }
   ],
   "emailDispatches": [
@@ -196,7 +103,7 @@
       "recipientEmail": "qse6209@gmail.com",
       "recipientName": "Tha Hogg (Admin Test)",
       "subject": "[TEST DISPATCH] Welcome to Tha Network // You're Locked In",
-      "bodyText": "Peace Tha,\n\nAppreciate you locking in with Tha Network.\n\nWhen we built Quarter Spoon, it wasn't just to put up another website or chase algorithms. It was about creating a dedicated frequency where the visual art, the sound, and the real stories get delivered raw and uncut—the way they were meant to be experienced.\n\nHere is what being on this list means for you:\n• First-look access to unreleased Unda Tha Radar films and visual drops before they hit any public feed.\n• Direct studio dispatches, session archives, and creative breakdowns you won't find anywhere else.\n• Private invitations to screenings, project debuts, and network events.\n\nNo spam, no corporate noise. Just authentic work coming straight from the deck.\n\nKeep your notifications on and your eyes open. We are just getting started.\n\nRespect,\n\nTha Hogg\nQuarter Spoon Network // Unda Tha Radar Filmz\nFresno, CA",
+      "bodyText": "Peace Tha,\\n\\nAppreciate you locking in with Tha Network.\\n\\nWhen we built Quarter Spoon, it wasn't just to put up another website or chase algorithms. It was about creating a dedicated frequency where the visual art, the sound, and the real stories get delivered raw and uncut—the way they were meant to be experienced.\\n\\nHere is what being on this list means for you:\\n• First-look access to unreleased Unda Tha Radar films and visual drops before they hit any public feed.\\n• Direct studio dispatches, session archives, and creative breakdowns you won't find anywhere else.\\n• Private invitations to screenings, project debuts, and network events.\\n\\nNo spam, no corporate noise. Just authentic work coming straight from the deck.\\n\\nKeep your notifications on and your eyes open. We are just getting started.\\n\\nRespect,\\n\\nTha Hogg\\nQuarter Spoon Network // Unda Tha Radar Filmz\\nFresno, CA",
       "status": "sent"
     },
     {
@@ -206,271 +113,50 @@
       "recipientEmail": "qse6209@gmail.com",
       "recipientName": "Tha Hogg (Admin Test)",
       "subject": "[TEST DISPATCH] Welcome to Tha Network // You're Locked In",
-      "bodyText": "Peace Tha,\n\nAppreciate you locking in with Tha Network.\n\nWhen we built Quarter Spoon, it wasn't just to put up another website or chase algorithms. It was about creating a dedicated frequency where the visual art, the sound, and the real stories get delivered raw and uncut—the way they were meant to be experienced.\n\nHere is what being on this list means for you:\n• First-look access to unreleased Unda Tha Radar films and visual drops before they hit any public feed.\n• Direct studio dispatches, session archives, and creative breakdowns you won't find anywhere else.\n• Private invitations to screenings, project debuts, and network events.\n\nNo spam, no corporate noise. Just authentic work coming straight from the deck.\n\nKeep your notifications on and your eyes open. We are just getting started.\n\nRespect,\n\nTha Hogg\nQuarter Spoon Network // Unda Tha Radar Filmz\nFresno, CA",
-      "status": "sent"
-    },
-    {
-      "id": "disp_1789242595954_tmz63",
-      "sentAt": "2026-09-12T19:49:55.954Z",
-      "type": "direct_reply",
-      "recipientEmail": "m.vance.westfresno@gmail.com",
-      "recipientName": "Marcus Vance",
-      "subject": "Tha Hogg // Next Prompt Bundle Drop: Lowriders & Hydraulics",
-      "bodyText": "Salute Marcus,\n\nGot your note regarding the West Fresno lowriders and neon night scene templates. I have locked this exact visual concept into the next drop for the Digital Workflow vault.\n\nKeep creating,\n\n— Tha Hogg",
-      "status": "sent"
-    },
-    {
-      "id": "disp_1789241495727_wdg7y",
-      "sentAt": "2026-09-12T19:31:35.727Z",
-      "type": "invite",
-      "recipientEmail": "tianabrooks.creative@gmail.com",
-      "recipientName": "Tiana Brooks",
-      "subject": "Prompt suggestion",
-      "bodyText": "I Just emailed you, but this is a follow up to let you know that I will have those done for you in an hour or two.",
-      "status": "sent"
-    },
-    {
-      "id": "disp_1789239895732_en2pg",
-      "sentAt": "2026-09-12T19:04:55.732Z",
-      "type": "digital_workflow",
-      "recipientEmail": "m.vance.westfresno@gmail.com",
-      "recipientName": "Marcus Vance",
-      "subject": "Exclusive Creator Drop: Digital Workflow Vault is Live // Tha Network",
-      "bodyText": "Peace Marcus,\n\nFirst off, appreciate you taking the time to lock in with Tha Network. As a genuine thank you for your support, I just opened up a brand new private sector on the platform built strictly for digital creators:\n\n>> \"DIGITAL WORKFLOW\" (Subscriber Exclusive Vault)\n\nInside, you will find \"Tha Prompt Zone\"—loaded with master-grade T2I (Text-To-Image) and I2V (Image-To-Video) prompt templates:\n• The Plug-And-Play Production Suite (Vol. 1): 10 cinematic scene blueprints ready to swap and render.\n• Monster Master Set: 6-second timeline JSON architecture fused with Arri RAW 6.5K, ACEScg color, and Unreal Engine path-traced optics.\n\nBoth are available for instant 1-click download right to your device.\n\nAND HERE IS THE DEAL:\nEvery single month, I will be dropping a brand new bundle of prompts and creator tools into the Digital Workflow vault for you to use on your own productions. No extra cost, no games. Just real tools for real creators.\n\nWant a specific look, lighting setup, or cinematic genre? Check out \"Tha Suggestion Box\" inside the vault and tell me what you want built next.\n\nUnlock your blueprints here:\nhttp://localhost:3000/digital-workflow\n\nRespect,\n\nTha Hogg\nQuarter Spoon Network // Unda Tha Radar Filmz\nFresno, CA",
-      "status": "sent"
-    },
-    {
-      "id": "disp_1789239895728_lmpsi",
-      "sentAt": "2026-09-12T19:04:55.728Z",
-      "type": "digital_workflow",
-      "recipientEmail": "qse6209@gmail.com",
-      "recipientName": "Quarter Spoon Executive",
-      "subject": "Exclusive Creator Drop: Digital Workflow Vault is Live // Tha Network",
-      "bodyText": "Peace Quarter,\n\nFirst off, appreciate you taking the time to lock in with Tha Network. As a genuine thank you for your support, I just opened up a brand new private sector on the platform built strictly for digital creators:\n\n>> \"DIGITAL WORKFLOW\" (Subscriber Exclusive Vault)\n\nInside, you will find \"Tha Prompt Zone\"—loaded with master-grade T2I (Text-To-Image) and I2V (Image-To-Video) prompt templates:\n• The Plug-And-Play Production Suite (Vol. 1): 10 cinematic scene blueprints ready to swap and render.\n• Monster Master Set: 6-second timeline JSON architecture fused with Arri RAW 6.5K, ACEScg color, and Unreal Engine path-traced optics.\n\nBoth are available for instant 1-click download right to your device.\n\nAND HERE IS THE DEAL:\nEvery single month, I will be dropping a brand new bundle of prompts and creator tools into the Digital Workflow vault for you to use on your own productions. No extra cost, no games. Just real tools for real creators.\n\nWant a specific look, lighting setup, or cinematic genre? Check out \"Tha Suggestion Box\" inside the vault and tell me what you want built next.\n\nUnlock your blueprints here:\nhttp://localhost:3000/digital-workflow\n\nRespect,\n\nTha Hogg\nQuarter Spoon Network // Unda Tha Radar Filmz\nFresno, CA",
-      "status": "sent"
-    },
-    {
-      "id": "disp_1789239895727_wxncj",
-      "sentAt": "2026-09-12T19:04:55.727Z",
-      "type": "digital_workflow",
-      "recipientEmail": "mrdulow12@gmail.com",
-      "recipientName": "Tha Hogg",
-      "subject": "Exclusive Creator Drop: Digital Workflow Vault is Live // Tha Network",
-      "bodyText": "Peace Tha,\n\nFirst off, appreciate you taking the time to lock in with Tha Network. As a genuine thank you for your support, I just opened up a brand new private sector on the platform built strictly for digital creators:\n\n>> \"DIGITAL WORKFLOW\" (Subscriber Exclusive Vault)\n\nInside, you will find \"Tha Prompt Zone\"—loaded with master-grade T2I (Text-To-Image) and I2V (Image-To-Video) prompt templates:\n• The Plug-And-Play Production Suite (Vol. 1): 10 cinematic scene blueprints ready to swap and render.\n• Monster Master Set: 6-second timeline JSON architecture fused with Arri RAW 6.5K, ACEScg color, and Unreal Engine path-traced optics.\n\nBoth are available for instant 1-click download right to your device.\n\nAND HERE IS THE DEAL:\nEvery single month, I will be dropping a brand new bundle of prompts and creator tools into the Digital Workflow vault for you to use on your own productions. No extra cost, no games. Just real tools for real creators.\n\nWant a specific look, lighting setup, or cinematic genre? Check out \"Tha Suggestion Box\" inside the vault and tell me what you want built next.\n\nUnlock your blueprints here:\nhttp://localhost:3000/digital-workflow\n\nRespect,\n\nTha Hogg\nQuarter Spoon Network // Unda Tha Radar Filmz\nFresno, CA",
-      "status": "sent"
-    },
-    {
-      "id": "disp_1789239895726_apcqn",
-      "sentAt": "2026-09-12T19:04:55.726Z",
-      "type": "digital_workflow",
-      "recipientEmail": "legend.fresno559@gmail.com",
-      "recipientName": "Legend Fresno",
-      "subject": "Exclusive Creator Drop: Digital Workflow Vault is Live // Tha Network",
-      "bodyText": "Peace Legend,\n\nFirst off, appreciate you taking the time to lock in with Tha Network. As a genuine thank you for your support, I just opened up a brand new private sector on the platform built strictly for digital creators:\n\n>> \"DIGITAL WORKFLOW\" (Subscriber Exclusive Vault)\n\nInside, you will find \"Tha Prompt Zone\"—loaded with master-grade T2I (Text-To-Image) and I2V (Image-To-Video) prompt templates:\n• The Plug-And-Play Production Suite (Vol. 1): 10 cinematic scene blueprints ready to swap and render.\n• Monster Master Set: 6-second timeline JSON architecture fused with Arri RAW 6.5K, ACEScg color, and Unreal Engine path-traced optics.\n\nBoth are available for instant 1-click download right to your device.\n\nAND HERE IS THE DEAL:\nEvery single month, I will be dropping a brand new bundle of prompts and creator tools into the Digital Workflow vault for you to use on your own productions. No extra cost, no games. Just real tools for real creators.\n\nWant a specific look, lighting setup, or cinematic genre? Check out \"Tha Suggestion Box\" inside the vault and tell me what you want built next.\n\nUnlock your blueprints here:\nhttp://localhost:3000/digital-workflow\n\nRespect,\n\nTha Hogg\nQuarter Spoon Network // Unda Tha Radar Filmz\nFresno, CA",
-      "status": "sent"
-    },
-    {
-      "id": "disp_1789236112030_3lv1n",
-      "sentAt": "2026-09-12T18:01:52.030Z",
-      "type": "invite",
-      "recipientEmail": "just_logged_in_fan@gmail.com",
-      "recipientName": "Fan WestFresno",
-      "subject": "You're in the building, now get the full frequency // Tha Network",
-      "bodyText": "Whutz Up?,\n\nI Noticed you logged in to the Quarter Spoon Network portal recently. First of all, Thank U for tapping in and exploring the visuals.\n\nBut Peep: right now you have access to the studio floor, but you're missing out on what happens behind closed doors. We run a private dispatch list called \"Tha Network\"—and that's where the real transmission lives.\n\nWhen you join Tha Network, you get:\n• Exclusive visual cuts and unreleased film archives before they go live anywhere else.\n• Private updates on upcoming projects from Unda Tha Radar Filmz.\n• Direct dispatches and studio game straight from the source.\n\nIt takes one clicc to locc in, zero cost, and no fluff filling up your inbox. If you're going to be in the space, tap into the full frequency.\n\nLock into Tha Network here:\nhttp://localhost:3000?subscribe=tha-network\n\nThank U Again.\n\nRespect,\n\nTha Hogg\nQuarter Spoon Network // Unda Tha Radar Filmz\nFresno, CA",
-      "status": "sent"
-    },
-    {
-      "id": "disp_1789236104668_5uwpv",
-      "sentAt": "2026-09-12T18:01:44.668Z",
-      "type": "invite",
-      "recipientEmail": "reed.visuals@gmail.com",
-      "recipientName": "Devon Reed",
-      "subject": "You're in the building, now get the full frequency // Tha Network",
-      "bodyText": "Whutz Up?,\n\nI Noticed you logged in to the Quarter Spoon Network portal recently. First of all, Thank U for tapping in and exploring the visuals.\n\nBut Peep: right now you have access to the studio floor, but you're missing out on what happens behind closed doors. We run a private dispatch list called \"Tha Network\"—and that's where the real transmission lives.\n\nWhen you join Tha Network, you get:\n• Exclusive visual cuts and unreleased film archives before they go live anywhere else.\n• Private updates on upcoming projects from Unda Tha Radar Filmz.\n• Direct dispatches and studio game straight from the source.\n\nIt takes one clicc to locc in, zero cost, and no fluff filling up your inbox. If you're going to be in the space, tap into the full frequency.\n\nLock into Tha Network here:\nhttp://localhost:3000?subscribe=tha-network\n\nThank U Again.\n\nRespect,\n\nTha Hogg\nQuarter Spoon Network // Unda Tha Radar Filmz\nFresno, CA",
-      "status": "sent"
-    },
-    {
-      "id": "disp_1789236096627_4goap",
-      "sentAt": "2026-09-12T18:01:36.627Z",
-      "type": "invite",
-      "recipientEmail": "tianabrooks.creative@gmail.com",
-      "recipientName": "Tiana Brooks",
-      "subject": "You're in the building, now get the full frequency // Tha Network",
-      "bodyText": "Whutz Up?,\n\nI Noticed you logged in to the Quarter Spoon Network portal recently. First of all, Thank U for tapping in and exploring the visuals.\n\nBut Peep: right now you have access to the studio floor, but you're missing out on what happens behind closed doors. We run a private dispatch list called \"Tha Network\"—and that's where the real transmission lives.\n\nWhen you join Tha Network, you get:\n• Exclusive visual cuts and unreleased film archives before they go live anywhere else.\n• Private updates on upcoming projects from Unda Tha Radar Filmz.\n• Direct dispatches and studio game straight from the source.\n\nIt takes one clicc to locc in, zero cost, and no fluff filling up your inbox. If you're going to be in the space, tap into the full frequency.\n\nLock into Tha Network here:\nhttp://localhost:3000?subscribe=tha-network\n\nThank U Again.\n\nRespect,\n\nTha Hogg\nQuarter Spoon Network // Unda Tha Radar Filmz\nFresno, CA",
-      "status": "sent"
-    },
-    {
-      "id": "disp_1789236080855_vhd4y",
-      "sentAt": "2026-09-12T18:01:20.855Z",
-      "type": "invite",
-      "recipientEmail": "djenkins559@yahoo.com",
-      "recipientName": "Darnell Jenkins",
-      "subject": "You're in the building, now get the full frequency // Tha Network",
-      "bodyText": "Whutz Up?,\n\nI Noticed you logged in to the Quarter Spoon Network portal recently. First of all, Thank U for tapping in and exploring the visuals.\n\nBut Peep: right now you have access to the studio floor, but you're missing out on what happens behind closed doors. We run a private dispatch list called \"Tha Network\"—and that's where the real transmission lives.\n\nWhen you join Tha Network, you get:\n• Exclusive visual cuts and unreleased film archives before they go live anywhere else.\n• Private updates on upcoming projects from Unda Tha Radar Filmz.\n• Direct dispatches and studio game straight from the source.\n\nIt takes one clicc to locc in, zero cost, and no fluff filling up your inbox. If you're going to be in the space, tap into the full frequency.\n\nLock into Tha Network here:\nhttp://localhost:3000?subscribe=tha-network\n\nThank U Again.\n\nRespect,\n\nTha Hogg\nQuarter Spoon Network // Unda Tha Radar Filmz\nFresno, CA",
-      "status": "sent"
-    },
-    {
-      "id": "disp_1789235614113_bgtwb",
-      "sentAt": "2026-09-12T17:53:34.113Z",
-      "type": "blast",
-      "recipientEmail": "just_logged_in_fan@gmail.com",
-      "recipientName": "Fan WestFresno",
-      "subject": "You're in the building, now get the full frequency // Tha Network",
-      "bodyText": "Peace Fan,\n\nNoticed you checked in to the Quarter Spoon Network portal recently. Respect for tapping in and exploring the visuals.\n\nQuick word: right now you have access to the studio floor, but you're missing out on what happens behind closed doors. We run a private dispatch list called \"Tha Network\"—and that's where the real transmission lives.\n\nWhen you join Tha Network, you get:\n• Exclusive visual cuts and unreleased film archives before they go live anywhere else.\n• Private updates on upcoming projects from Unda Tha Radar Filmz.\n• Direct dispatches and studio game straight from the source.\n\nIt takes one click to lock in, zero cost, and no fluff filling up your inbox. If you're going to be in the space, tap into the full frequency.\n\nLock into Tha Network here:\nhttp://localhost:3000?subscribe=tha-network\n\nCatch you on the other side.\n\nRespect,\n\nTha Hogg\nQuarter Spoon Network // Unda Tha Radar Filmz\nFresno, CA",
-      "status": "sent"
-    },
-    {
-      "id": "disp_1789235614113_aq71b",
-      "sentAt": "2026-09-12T17:53:34.113Z",
-      "type": "blast",
-      "recipientEmail": "reed.visuals@gmail.com",
-      "recipientName": "Devon Reed",
-      "subject": "You're in the building, now get the full frequency // Tha Network",
-      "bodyText": "Peace Devon,\n\nNoticed you checked in to the Quarter Spoon Network portal recently. Respect for tapping in and exploring the visuals.\n\nQuick word: right now you have access to the studio floor, but you're missing out on what happens behind closed doors. We run a private dispatch list called \"Tha Network\"—and that's where the real transmission lives.\n\nWhen you join Tha Network, you get:\n• Exclusive visual cuts and unreleased film archives before they go live anywhere else.\n• Private updates on upcoming projects from Unda Tha Radar Filmz.\n• Direct dispatches and studio game straight from the source.\n\nIt takes one click to lock in, zero cost, and no fluff filling up your inbox. If you're going to be in the space, tap into the full frequency.\n\nLock into Tha Network here:\nhttp://localhost:3000?subscribe=tha-network\n\nCatch you on the other side.\n\nRespect,\n\nTha Hogg\nQuarter Spoon Network // Unda Tha Radar Filmz\nFresno, CA",
-      "status": "sent"
-    },
-    {
-      "id": "disp_1789235614112_gcu8j",
-      "sentAt": "2026-09-12T17:53:34.112Z",
-      "type": "blast",
-      "recipientEmail": "tianabrooks.creative@gmail.com",
-      "recipientName": "Tiana Brooks",
-      "subject": "You're in the building, now get the full frequency // Tha Network",
-      "bodyText": "Peace Tiana,\n\nNoticed you checked in to the Quarter Spoon Network portal recently. Respect for tapping in and exploring the visuals.\n\nQuick word: right now you have access to the studio floor, but you're missing out on what happens behind closed doors. We run a private dispatch list called \"Tha Network\"—and that's where the real transmission lives.\n\nWhen you join Tha Network, you get:\n• Exclusive visual cuts and unreleased film archives before they go live anywhere else.\n• Private updates on upcoming projects from Unda Tha Radar Filmz.\n• Direct dispatches and studio game straight from the source.\n\nIt takes one click to lock in, zero cost, and no fluff filling up your inbox. If you're going to be in the space, tap into the full frequency.\n\nLock into Tha Network here:\nhttp://localhost:3000?subscribe=tha-network\n\nCatch you on the other side.\n\nRespect,\n\nTha Hogg\nQuarter Spoon Network // Unda Tha Radar Filmz\nFresno, CA",
-      "status": "sent"
-    },
-    {
-      "id": "disp_1789235614111_rrso7",
-      "sentAt": "2026-09-12T17:53:34.111Z",
-      "type": "blast",
-      "recipientEmail": "djenkins559@yahoo.com",
-      "recipientName": "Darnell Jenkins",
-      "subject": "You're in the building, now get the full frequency // Tha Network",
-      "bodyText": "Peace Darnell,\n\nNoticed you checked in to the Quarter Spoon Network portal recently. Respect for tapping in and exploring the visuals.\n\nQuick word: right now you have access to the studio floor, but you're missing out on what happens behind closed doors. We run a private dispatch list called \"Tha Network\"—and that's where the real transmission lives.\n\nWhen you join Tha Network, you get:\n• Exclusive visual cuts and unreleased film archives before they go live anywhere else.\n• Private updates on upcoming projects from Unda Tha Radar Filmz.\n• Direct dispatches and studio game straight from the source.\n\nIt takes one click to lock in, zero cost, and no fluff filling up your inbox. If you're going to be in the space, tap into the full frequency.\n\nLock into Tha Network here:\nhttp://localhost:3000?subscribe=tha-network\n\nCatch you on the other side.\n\nRespect,\n\nTha Hogg\nQuarter Spoon Network // Unda Tha Radar Filmz\nFresno, CA",
-      "status": "sent"
-    },
-    {
-      "id": "disp_1789235564665_83kp7",
-      "sentAt": "2026-09-12T17:52:44.665Z",
-      "type": "thank_you",
-      "recipientEmail": "legend.fresno559@gmail.com",
-      "recipientName": "Legend Fresno",
-      "subject": "Welcome to Tha Network // You're Locked In",
-      "bodyText": "Peace Legend,\n\nAppreciate you locking in with Tha Network.\n\nWhen we built Quarter Spoon, it wasn't just to put up another website or chase algorithms. It was about creating a dedicated frequency where the visual art, the sound, and the real stories get delivered raw and uncut—the way they were meant to be experienced.\n\nHere is what being on this list means for you:\n• First-look access to unreleased Unda Tha Radar films and visual drops before they hit any public feed.\n• Direct studio dispatches, session archives, and creative breakdowns you won't find anywhere else.\n• Private invitations to screenings, project debuts, and network events.\n\nNo spam, no corporate noise. Just authentic work coming straight from the deck.\n\nKeep your notifications on and your eyes open. We are just getting started.\n\nRespect,\n\nTha Hogg\nQuarter Spoon Network // Unda Tha Radar Filmz\nFresno, CA",
-      "status": "sent"
-    },
-    {
-      "id": "disp_init_1",
-      "type": "thank_you",
-      "recipientEmail": "m.vance.westfresno@gmail.com",
-      "recipientName": "Marcus Vance",
-      "subject": "Welcome to Tha Network // You're Locked In",
-      "bodyText": "Appreciate you locking in with Tha Network...",
-      "sentAt": "2026-09-02T18:25:00.000Z",
+      "bodyText": "Peace Tha,\\n\\nAppreciate you locking in with Tha Network.\\n\\nWhen we built Quarter Spoon, it wasn't just to put up another website or chase algorithms. It was about creating a dedicated frequency where the visual art, the sound, and the real stories get delivered raw and uncut—the way they were meant to be experienced.\\n\\nHere is what being on this list means for you:\\n• First-look access to unreleased Unda Tha Radar films and visual drops before they hit any public feed.\\n• Direct studio dispatches, session archives, and creative breakdowns you won't find anywhere else.\\n• Private invitations to screenings, project debuts, and network events.\\n\\nNo spam, no corporate noise. Just authentic work coming straight from the deck.\\n\\nKeep your notifications on and your eyes open. We are just getting started.\\n\\nRespect,\\n\\nTha Hogg\\nQuarter Spoon Network // Unda Tha Radar Filmz\\nFresno, CA",
       "status": "sent"
     }
   ],
-  "videoPlays": [
-    {
-      "id": "play_1789240016647_c5ec",
-      "videoId": "scene-of-screams",
-      "videoTitle": "SCENE OF SCREAMS",
-      "userEmail": "djenkins559@yahoo.com",
-      "userName": "Darnell Jenkins",
-      "isSubscriber": false,
-      "timestamp": "2026-09-12T19:06:56.647Z"
-    },
-    {
-      "id": "play_1789239948305_tle9",
-      "videoId": "tha-game-should-be-told",
-      "videoTitle": "THA GAME SHOULD BE TOLD",
-      "userEmail": "mrdulow12@gmail.com",
-      "userName": "Tha Hogg",
-      "isSubscriber": true,
-      "timestamp": "2026-09-12T19:05:48.302Z"
-    },
-    {
-      "id": "play_1789239882887_kj2s",
-      "videoId": "in-every-section",
-      "videoTitle": "IN EVERY SECTION",
-      "userEmail": "reed.visuals@gmail.com",
-      "userName": "Devon Reed",
-      "isSubscriber": false,
-      "timestamp": "2026-09-12T19:04:42.887Z"
-    },
-    {
-      "id": "play_1789239877485_uk87",
-      "videoId": "scene-of-screams",
-      "videoTitle": "SCENE OF SCREAMS",
-      "userEmail": "m.vance.westfresno@gmail.com",
-      "userName": "Marcus Vance",
-      "isSubscriber": true,
-      "timestamp": "2026-09-12T19:04:37.485Z"
-    }
-  ],
+  "videoPlays": [],
   "videoStats": {
-    "scene-of-screams": {
-      "videoId": "scene-of-screams",
-      "videoTitle": "SCENE OF SCREAMS",
-      "category": "ORIGINAL FILMS",
-      "totalPlays": 21,
-      "subscriberPlays": 16,
-      "nonSubscriberPlays": 5,
-      "lastPlayedAt": "2026-09-12T19:06:56.647Z"
-    },
     "in-every-section": {
       "videoId": "in-every-section",
       "videoTitle": "IN EVERY SECTION",
       "category": "WEST FRESNO",
-      "totalPlays": 49,
-      "subscriberPlays": 34,
-      "nonSubscriberPlays": 15,
-      "lastPlayedAt": "2026-09-12T19:04:42.887Z"
-    },
-    "tha-game-should-be-told": {
-      "videoId": "tha-game-should-be-told",
-      "videoTitle": "THA GAME SHOULD BE TOLD",
-      "category": "A.I. TUTORIAL",
-      "totalPlays": 28,
-      "subscriberPlays": 20,
-      "nonSubscriberPlays": 8,
-      "lastPlayedAt": "2026-09-12T19:05:48.302Z"
+      "totalPlays": 0,
+      "subscriberPlays": 0,
+      "nonSubscriberPlays": 0,
+      "lastPlayedAt": null
     },
     "tha-hogg-channel": {
       "videoId": "tha-hogg-channel",
       "videoTitle": "THA HOGG // VISUAL CREATIONS",
       "category": "OFFICIAL YOUTUBE",
-      "totalPlays": 32,
-      "subscriberPlays": 22,
-      "nonSubscriberPlays": 10,
-      "lastPlayedAt": "2026-09-12T18:21:40.467Z"
+      "totalPlays": 0,
+      "subscriberPlays": 0,
+      "nonSubscriberPlays": 0,
+      "lastPlayedAt": null
+    },
+    "tha-game-should-be-told": {
+      "videoId": "tha-game-should-be-told",
+      "videoTitle": "THA GAME SHOULD BE TOLD",
+      "category": "A.I. TUTORIAL",
+      "totalPlays": 0,
+      "subscriberPlays": 0,
+      "nonSubscriberPlays": 0,
+      "lastPlayedAt": null
+    },
+    "scene-of-screams": {
+      "videoId": "scene-of-screams",
+      "videoTitle": "SCENE OF SCREAMS",
+      "category": "ORIGINAL FILMS",
+      "totalPlays": 0,
+      "subscriberPlays": 0,
+      "nonSubscriberPlays": 0,
+      "lastPlayedAt": null
     }
   },
-  "gameInquiries": [
-    {
-      "id": "inq_1789241917674_vn86",
-      "timestamp": "2026-09-12T19:38:37.675Z",
-      "fullName": "Marcus Vance",
-      "email": "m.vance.westfresno@gmail.com",
-      "category": "Prompt Bundle Suggestion",
-      "question": "Would love to see classic lowrider hydraulics & street neon prompts in the next monthly drop!",
-      "reply": {
-        "text": "Salute Marcus,\n\nGot your note regarding the West Fresno lowriders and neon night scene templates. I have locked this exact visual concept into the next drop for the Digital Workflow vault.\n\nKeep creating,\n\n— Tha Hogg",
-        "repliedAt": "2026-09-12T19:49:55.945Z",
-        "adminEmail": "mrdulow12@gmail.com",
-        "subject": "Tha Hogg // Next Prompt Bundle Drop: Lowriders & Hydraulics"
-      },
-      "status": "replied"
-    },
-    {
-      "id": "inq_1789239889506_lu8q",
-      "timestamp": "2026-09-12T19:04:49.506Z",
-      "fullName": "Tiana Brooks",
-      "email": "tianabrooks.creative@gmail.com",
-      "category": "PROMPT BUNDLE SUGGESTION",
-      "question": "Can we get a prompt bundle for 90s West Coast cinematography lighting with warm golden hour tones for Midjourney v7?"
-    }
-  ],
+  "gameInquiries": [],
   "pdfStats": {
     "plug-and-play-suite-vol1": {
       "pdfId": "plug-and-play-suite-vol1",

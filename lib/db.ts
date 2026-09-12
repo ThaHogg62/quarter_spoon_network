@@ -57,7 +57,7 @@ export interface DBVideoStat {
   totalPlays: number;
   subscriberPlays: number;
   nonSubscriberPlays: number;
-  lastPlayedAt: string;
+  lastPlayedAt: string | null;
 }
 
 export interface DBGameInquiry {
@@ -148,41 +148,41 @@ export const BASE_VIDEO_STATS: Record<string, DBVideoStat> = {
     videoId: "in-every-section",
     videoTitle: "IN EVERY SECTION",
     category: "WEST FRESNO",
-    totalPlays: 48,
-    subscriberPlays: 34,
-    nonSubscriberPlays: 14,
-    lastPlayedAt: new Date(Date.now() - 1000 * 60 * 12).toISOString(),
+    totalPlays: 0,
+    subscriberPlays: 0,
+    nonSubscriberPlays: 0,
+    lastPlayedAt: null,
   },
   "tha-hogg-channel": {
     videoId: "tha-hogg-channel",
     videoTitle: "THA HOGG // VISUAL CREATIONS",
     category: "OFFICIAL YOUTUBE",
-    totalPlays: 32,
-    subscriberPlays: 22,
-    nonSubscriberPlays: 10,
-    lastPlayedAt: new Date(Date.now() - 1000 * 60 * 45).toISOString(),
+    totalPlays: 0,
+    subscriberPlays: 0,
+    nonSubscriberPlays: 0,
+    lastPlayedAt: null,
   },
   "tha-game-should-be-told": {
     videoId: "tha-game-should-be-told",
     videoTitle: "THA GAME SHOULD BE TOLD",
     category: "A.I. TUTORIAL",
-    totalPlays: 27,
-    subscriberPlays: 19,
-    nonSubscriberPlays: 8,
-    lastPlayedAt: new Date(Date.now() - 1000 * 60 * 80).toISOString(),
+    totalPlays: 0,
+    subscriberPlays: 0,
+    nonSubscriberPlays: 0,
+    lastPlayedAt: null,
   },
   "scene-of-screams": {
     videoId: "scene-of-screams",
     videoTitle: "SCENE OF SCREAMS",
     category: "ORIGINAL FILMS",
-    totalPlays: 19,
-    subscriberPlays: 15,
-    nonSubscriberPlays: 4,
-    lastPlayedAt: new Date(Date.now() - 1000 * 60 * 150).toISOString(),
+    totalPlays: 0,
+    subscriberPlays: 0,
+    nonSubscriberPlays: 0,
+    lastPlayedAt: null,
   },
 };
 
-// Initial baseline seed data to demonstrate live tables right out of the box
+// Initial baseline authentic administrative data
 const DEFAULT_DATA: NetworkDBData = {
   users: [
     {
@@ -198,46 +198,10 @@ const DEFAULT_DATA: NetworkDBData = {
       id: "usr_admin_qse",
       fullName: "Quarter Spoon Executive",
       email: "qse6209@gmail.com",
-      provider: "email",
+      provider: "google",
       createdAt: "2026-08-10T15:30:00.000Z",
-      lastLoginAt: new Date(Date.now() - 1000 * 60 * 45).toISOString(),
+      lastLoginAt: new Date().toISOString(),
       role: "admin",
-    },
-    {
-      id: "usr_member_1",
-      fullName: "Marcus Vance",
-      email: "m.vance.westfresno@gmail.com",
-      provider: "email",
-      createdAt: "2026-09-02T18:20:00.000Z",
-      lastLoginAt: new Date(Date.now() - 1000 * 60 * 12).toISOString(),
-      role: "member",
-    },
-    {
-      id: "usr_member_2",
-      fullName: "Darnell Jenkins",
-      email: "djenkins559@yahoo.com",
-      provider: "google",
-      createdAt: "2026-09-05T09:14:00.000Z",
-      lastLoginAt: new Date(Date.now() - 1000 * 60 * 180).toISOString(),
-      role: "member",
-    },
-    {
-      id: "usr_member_3",
-      fullName: "Tiana Brooks",
-      email: "tianabrooks.creative@gmail.com",
-      provider: "email",
-      createdAt: "2026-09-09T22:45:00.000Z",
-      lastLoginAt: new Date(Date.now() - 1000 * 60 * 20).toISOString(),
-      role: "member",
-    },
-    {
-      id: "usr_member_4",
-      fullName: "Devon Reed",
-      email: "reed.visuals@gmail.com",
-      provider: "google",
-      createdAt: "2026-09-11T14:10:00.000Z",
-      lastLoginAt: new Date(Date.now() - 1000 * 60 * 5).toISOString(),
-      role: "member",
     },
   ],
   subscribers: [
@@ -257,53 +221,9 @@ const DEFAULT_DATA: NetworkDBData = {
       source: "Founding List",
       status: "active",
     },
-    {
-      id: "sub_3",
-      email: "m.vance.westfresno@gmail.com",
-      fullName: "Marcus Vance",
-      subscribedAt: "2026-09-02T18:25:00.000Z",
-      source: "Tha Network Modal",
-      status: "active",
-    },
   ],
-  loginLogs: [
-    {
-      id: "log_init_1",
-      userId: "usr_member_4",
-      email: "reed.visuals@gmail.com",
-      fullName: "Devon Reed",
-      provider: "Google OAuth",
-      timestamp: new Date(Date.now() - 1000 * 60 * 5).toISOString(),
-    },
-    {
-      id: "log_init_2",
-      userId: "usr_member_1",
-      email: "m.vance.westfresno@gmail.com",
-      fullName: "Marcus Vance",
-      provider: "Password",
-      timestamp: new Date(Date.now() - 1000 * 60 * 12).toISOString(),
-    },
-    {
-      id: "log_init_3",
-      userId: "usr_member_3",
-      email: "tianabrooks.creative@gmail.com",
-      fullName: "Tiana Brooks",
-      provider: "Password",
-      timestamp: new Date(Date.now() - 1000 * 60 * 20).toISOString(),
-    },
-  ],
-  emailDispatches: [
-    {
-      id: "disp_init_1",
-      type: "thank_you",
-      recipientEmail: "m.vance.westfresno@gmail.com",
-      recipientName: "Marcus Vance",
-      subject: "Welcome to Tha Network // You're Locked In",
-      bodyText: "Appreciate you locking in with Tha Network...",
-      sentAt: "2026-09-02T18:25:00.000Z",
-      status: "sent",
-    },
-  ],
+  loginLogs: [],
+  emailDispatches: [],
   videoStats: { ...BASE_VIDEO_STATS },
   videoPlays: [],
   gameInquiries: [],

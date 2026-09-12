@@ -390,7 +390,7 @@ export default function GetUSomeGamePage() {
                     type="text"
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
-                    placeholder="Marcus Vance"
+                    placeholder="Your Full Name"
                     className="w-full bg-[#05060A] border border-white/15 focus:border-amber-400 rounded-xl px-4 py-2.5 text-sm text-white placeholder-zinc-600 focus:outline-none transition-colors"
                   />
                 </div>
