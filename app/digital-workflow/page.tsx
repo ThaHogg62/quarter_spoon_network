@@ -306,14 +306,6 @@ export default function DigitalWorkflowPage() {
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
             <span>SUBSCRIBER VIP UNLOCKED</span>
           </div>
-
-          <Link
-            href="/get-u-some-game"
-            className="hidden md:flex items-center space-x-1.5 text-xs font-mono text-zinc-300 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 px-3 py-1.5 rounded-full transition-colors"
-          >
-            <MessageSquare className="w-3.5 h-3.5 text-amber-400" />
-            <span>Ask Tha Hogg</span>
-          </Link>
         </div>
       </header>
 

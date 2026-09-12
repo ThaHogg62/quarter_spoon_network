@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -17,6 +17,7 @@ import {
   Layers,
   ExternalLink,
   LogOut,
+  MessageSquare,
 } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 
@@ -93,7 +94,37 @@ export default function ThaVisualsPage() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const [activeFilter, setActiveFilter] = useState("ALL");
+  const [isSubscribed, setIsSubscribed] = useState<boolean>(false);
   const videoPlayerRef = useRef<HTMLVideoElement | null>(null);
+
+  // Verify subscriber access against backend
+  useEffect(() => {
+    async function verifySubscription() {
+      if (!user?.email) {
+        setIsSubscribed(false);
+        return;
+      }
+      try {
+        const res = await fetch(`/api/subscribe?email=${encodeURIComponent(user.email)}`);
+        const json = await res.json();
+        setIsSubscribed(!!json.isSubscribed);
+      } catch {
+        setIsSubscribed(false);
+      }
+    }
+    verifySubscription();
+  }, [user]);
+
+  // Live listener for subscription events
+  useEffect(() => {
+    const handleSubscribed = (e: any) => {
+      if (e.detail?.email && user?.email && e.detail.email.toLowerCase() === user.email.toLowerCase()) {
+        setIsSubscribed(true);
+      }
+    };
+    window.addEventListener("tha-network-subscribed", handleSubscribed);
+    return () => window.removeEventListener("tha-network-subscribed", handleSubscribed);
+  }, [user]);
 
   const recordPlayEvent = (item: VideoItem) => {
     try {
@@ -193,6 +224,19 @@ export default function ThaVisualsPage() {
         </div>
 
         <div className="flex items-center space-x-3">
+          {/* VIP Subscriber Only: "GET U SOME GAME" Header Link */}
+          {isSubscribed && (
+            <Link
+              href="/get-u-some-game"
+              className="flex items-center space-x-1.5 bg-gradient-to-r from-amber-500/20 to-amber-600/20 hover:from-amber-500/30 hover:to-amber-600/30 border border-amber-400/50 hover:border-amber-400 text-amber-300 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold tracking-wider transition-all shadow-[0_0_15px_rgba(245,158,11,0.2)] cursor-pointer"
+              title="Get U Some Game - Direct Ask Tha Hogg Dialog (VIP Subscriber Exclusive)"
+            >
+              <MessageSquare className="w-3.5 h-3.5 text-amber-400" />
+              <span className="hidden sm:inline">GET U SOME GAME</span>
+              <span className="sm:hidden">GAME</span>
+            </Link>
+          )}
+
           <div className="flex items-center space-x-2 text-[11px] font-mono tracking-wider text-emerald-400 bg-black/60 border border-emerald-500/30 px-3.5 py-1.5 rounded-full">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
             <span className="hidden sm:inline">BROADCAST VAULT</span>
@@ -549,6 +593,43 @@ export default function ThaVisualsPage() {
           </div>
         </section>
       </main>
+
+      {/* ========================================================================= */}
+      {/* BOTTOM LEFT FLOATING BUTTON: "GET U SOME GAME" (SUBSCRIBERS EXCLUSIVE)   */}
+      {/* Only visible on the Tha Visuals page to active subscribed members          */}
+      {/* ========================================================================= */}
+      {isSubscribed && (
+        <div className="fixed bottom-6 left-6 z-40">
+          <Link
+            href="/get-u-some-game"
+            className="group relative flex items-center space-x-3 bg-[#0A0E1A]/95 hover:bg-[#0E1526] backdrop-blur-xl border border-cyan-500/40 hover:border-cyan-400 p-1.5 pr-4 rounded-2xl shadow-[0_8px_30px_rgba(6,182,212,0.25)] hover:shadow-[0_0_35px_rgba(56,189,248,0.4)] transition-all transform hover:scale-105 active:scale-95 cursor-pointer"
+            title="Get U Some Game - Ask Tha Hogg Anything (VIP Subscriber Exclusive)"
+          >
+            {/* Uploaded Quarter Spoon Muzicc 16:9 Logo Badge */}
+            <div className="relative w-14 h-8 sm:w-16 sm:h-9 rounded-xl overflow-hidden bg-black border border-cyan-500/30 group-hover:border-cyan-400 transition-colors shrink-0 shadow-inner">
+              <Image
+                src="/images/get_game_footer_btn.jpg"
+                alt="Quarter Spoon Muzicc - Get U Some Game"
+                fill
+                priority
+                unoptimized
+                className="object-cover object-center group-hover:scale-105 transition-transform duration-300"
+              />
+            </div>
+
+            {/* Label in Card Style and Colors */}
+            <div className="flex flex-col text-left">
+              <span className="text-[9px] font-mono tracking-[2px] uppercase text-cyan-400 font-bold leading-none flex items-center space-x-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse inline-block" />
+                <span>GET U SOME</span>
+              </span>
+              <span className="text-xs font-black tracking-wider uppercase text-white leading-tight group-hover:text-cyan-300 transition-colors pt-0.5">
+                GAME
+              </span>
+            </div>
+          </Link>
+        </div>
+      )}
     </div>
   );
 }

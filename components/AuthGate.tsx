@@ -2,7 +2,6 @@
 
 import React, { useEffect, Suspense } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 import { LogOut, User as UserIcon, Shield, ShieldCheck, Sparkles } from "lucide-react";
@@ -111,42 +110,7 @@ export default function AuthGate({ children }: { children: React.ReactNode }) {
 
       {children}
 
-      {/* ========================================================================= */}
-      {/* BOTTOM LEFT FOOTER BUTTON: "GET U SOME GAME"                               */}
-      {/* Symmetrical, card-styled, and matches the exact color and aesthetic        */}
-      {/* ========================================================================= */}
-      {pathname !== "/get-u-some-game" && pathname !== "/admin" && (
-        <div className="fixed bottom-6 left-6 z-40">
-          <Link
-            href="/get-u-some-game"
-            className="group relative flex items-center space-x-3 bg-[#0A0E1A]/95 hover:bg-[#0E1526] backdrop-blur-xl border border-cyan-500/40 hover:border-cyan-400 p-1.5 pr-4 rounded-2xl shadow-[0_8px_30px_rgba(6,182,212,0.25)] hover:shadow-[0_0_35px_rgba(56,189,248,0.4)] transition-all transform hover:scale-105 active:scale-95 cursor-pointer"
-            title="Get U Some Game - Ask Tha Hogg Anything"
-          >
-            {/* Uploaded Quarter Spoon Muzicc 16:9 Logo Badge */}
-            <div className="relative w-14 h-8 sm:w-16 sm:h-9 rounded-xl overflow-hidden bg-black border border-cyan-500/30 group-hover:border-cyan-400 transition-colors shrink-0 shadow-inner">
-              <Image
-                src="/images/get_game_footer_btn.jpg"
-                alt="Quarter Spoon Muzicc - Get U Some Game"
-                fill
-                priority
-                unoptimized
-                className="object-cover object-center group-hover:scale-105 transition-transform duration-300"
-              />
-            </div>
 
-            {/* Label in Card Style and Colors */}
-            <div className="flex flex-col text-left">
-              <span className="text-[9px] font-mono tracking-[2px] uppercase text-cyan-400 font-bold leading-none flex items-center space-x-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse inline-block" />
-                <span>GET U SOME</span>
-              </span>
-              <span className="text-xs font-black tracking-wider uppercase text-white leading-tight group-hover:text-cyan-300 transition-colors pt-0.5">
-                GAME
-              </span>
-            </div>
-          </Link>
-        </div>
-      )}
 
       {/* Tha Network Email List Subscription Trigger & Modal */}
       {pathname !== "/admin" && (
