@@ -190,6 +190,26 @@
   ],
   "emailDispatches": [
     {
+      "id": "disp_1789243661417_2qvt6",
+      "sentAt": "2026-09-12T20:07:41.417Z",
+      "type": "preview",
+      "recipientEmail": "qse6209@gmail.com",
+      "recipientName": "Tha Hogg (Admin Test)",
+      "subject": "[TEST DISPATCH] Welcome to Tha Network // You're Locked In",
+      "bodyText": "Peace Tha,\n\nAppreciate you locking in with Tha Network.\n\nWhen we built Quarter Spoon, it wasn't just to put up another website or chase algorithms. It was about creating a dedicated frequency where the visual art, the sound, and the real stories get delivered raw and uncut—the way they were meant to be experienced.\n\nHere is what being on this list means for you:\n• First-look access to unreleased Unda Tha Radar films and visual drops before they hit any public feed.\n• Direct studio dispatches, session archives, and creative breakdowns you won't find anywhere else.\n• Private invitations to screenings, project debuts, and network events.\n\nNo spam, no corporate noise. Just authentic work coming straight from the deck.\n\nKeep your notifications on and your eyes open. We are just getting started.\n\nRespect,\n\nTha Hogg\nQuarter Spoon Network // Unda Tha Radar Filmz\nFresno, CA",
+      "status": "sent"
+    },
+    {
+      "id": "disp_1789243629744_zqozs",
+      "sentAt": "2026-09-12T20:07:09.744Z",
+      "type": "preview",
+      "recipientEmail": "qse6209@gmail.com",
+      "recipientName": "Tha Hogg (Admin Test)",
+      "subject": "[TEST DISPATCH] Welcome to Tha Network // You're Locked In",
+      "bodyText": "Peace Tha,\n\nAppreciate you locking in with Tha Network.\n\nWhen we built Quarter Spoon, it wasn't just to put up another website or chase algorithms. It was about creating a dedicated frequency where the visual art, the sound, and the real stories get delivered raw and uncut—the way they were meant to be experienced.\n\nHere is what being on this list means for you:\n• First-look access to unreleased Unda Tha Radar films and visual drops before they hit any public feed.\n• Direct studio dispatches, session archives, and creative breakdowns you won't find anywhere else.\n• Private invitations to screenings, project debuts, and network events.\n\nNo spam, no corporate noise. Just authentic work coming straight from the deck.\n\nKeep your notifications on and your eyes open. We are just getting started.\n\nRespect,\n\nTha Hogg\nQuarter Spoon Network // Unda Tha Radar Filmz\nFresno, CA",
+      "status": "sent"
+    },
+    {
       "id": "disp_1789242595954_tmz63",
       "sentAt": "2026-09-12T19:49:55.954Z",
       "type": "direct_reply",
@@ -450,5 +470,30 @@
       "category": "PROMPT BUNDLE SUGGESTION",
       "question": "Can we get a prompt bundle for 90s West Coast cinematography lighting with warm golden hour tones for Midjourney v7?"
     }
-  ]
+  ],
+  "pdfStats": {
+    "plug-and-play-suite-vol1": {
+      "pdfId": "plug-and-play-suite-vol1",
+      "pdfTitle": "The Plug-And-Play Production Suite (Vol. 1)",
+      "fileName": "the_plug_and_play_production_suite_vol1.pdf",
+      "category": "T2I / I2V Blueprints",
+      "fileSize": "138 KB",
+      "totalDownloads": 0,
+      "subscriberDownloads": 0,
+      "nonSubscriberDownloads": 0,
+      "lastDownloadedAt": null
+    },
+    "monster-master-set": {
+      "pdfId": "monster-master-set",
+      "pdfTitle": "Monster Master Set // Basic Character T2I & I2V",
+      "fileName": "basic_character_t2i_i2v.pdf",
+      "category": "Forensic Optics & JSON",
+      "fileSize": "118 KB",
+      "totalDownloads": 0,
+      "subscriberDownloads": 0,
+      "nonSubscriberDownloads": 0,
+      "lastDownloadedAt": null
+    }
+  },
+  "pdfDownloads": []
 }

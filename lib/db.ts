@@ -76,6 +76,31 @@ export interface DBGameInquiry {
   status?: "pending" | "replied";
 }
 
+export interface DBPdfDownload {
+  id: string;
+  pdfId: string;
+  pdfTitle: string;
+  fileName: string;
+  category: string;
+  fileSize: string;
+  userEmail: string;
+  userName: string;
+  isSubscriber: boolean;
+  timestamp: string;
+}
+
+export interface DBPdfStat {
+  pdfId: string;
+  pdfTitle: string;
+  fileName: string;
+  category: string;
+  fileSize: string;
+  totalDownloads: number;
+  subscriberDownloads: number;
+  nonSubscriberDownloads: number;
+  lastDownloadedAt: string | null;
+}
+
 export interface NetworkDBData {
   users: DBUser[];
   subscribers: DBSubscriber[];
@@ -84,12 +109,39 @@ export interface NetworkDBData {
   videoPlays?: DBVideoPlay[];
   videoStats?: Record<string, DBVideoStat>;
   gameInquiries?: DBGameInquiry[];
+  pdfDownloads?: DBPdfDownload[];
+  pdfStats?: Record<string, DBPdfStat>;
 }
 
 const DATA_DIR = path.join(process.cwd(), "data");
 const DB_FILE = path.join(DATA_DIR, "network_db.json");
 
 const ADMIN_EMAILS = ["mrdulow12@gmail.com", "qse6209@gmail.com"];
+
+export const BASE_PDF_STATS: Record<string, DBPdfStat> = {
+  "plug-and-play-suite-vol1": {
+    pdfId: "plug-and-play-suite-vol1",
+    pdfTitle: "The Plug-And-Play Production Suite (Vol. 1)",
+    fileName: "the_plug_and_play_production_suite_vol1.pdf",
+    category: "T2I / I2V Blueprints",
+    fileSize: "138 KB",
+    totalDownloads: 0,
+    subscriberDownloads: 0,
+    nonSubscriberDownloads: 0,
+    lastDownloadedAt: null,
+  },
+  "monster-master-set": {
+    pdfId: "monster-master-set",
+    pdfTitle: "Monster Master Set // Basic Character T2I & I2V",
+    fileName: "basic_character_t2i_i2v.pdf",
+    category: "Forensic Optics & JSON",
+    fileSize: "118 KB",
+    totalDownloads: 0,
+    subscriberDownloads: 0,
+    nonSubscriberDownloads: 0,
+    lastDownloadedAt: null,
+  },
+};
 
 export const BASE_VIDEO_STATS: Record<string, DBVideoStat> = {
   "in-every-section": {
@@ -255,6 +307,8 @@ const DEFAULT_DATA: NetworkDBData = {
   videoStats: { ...BASE_VIDEO_STATS },
   videoPlays: [],
   gameInquiries: [],
+  pdfStats: { ...BASE_PDF_STATS },
+  pdfDownloads: [],
 };
 
 function ensureDb(): NetworkDBData {
@@ -285,6 +339,20 @@ function ensureDb(): NetworkDBData {
     }
     if (!parsed.gameInquiries) {
       parsed.gameInquiries = [];
+      dirty = true;
+    }
+    if (!parsed.pdfStats) {
+      parsed.pdfStats = {};
+      dirty = true;
+    }
+    for (const [k, v] of Object.entries(BASE_PDF_STATS)) {
+      if (!parsed.pdfStats[k]) {
+        parsed.pdfStats[k] = { ...v };
+        dirty = true;
+      }
+    }
+    if (!parsed.pdfDownloads) {
+      parsed.pdfDownloads = [];
       dirty = true;
     }
     if (dirty) {
@@ -584,5 +652,88 @@ export const db = {
     inquiry.status = "replied";
     writeDb(data);
     return inquiry;
+  },
+
+  // PDF Downloads Telemetry & Accurate Counter
+  recordPdfDownload(payload: {
+    pdfId: string;
+    pdfTitle: string;
+    fileName: string;
+    category?: string;
+    fileSize?: string;
+    userEmail?: string;
+    userName?: string;
+    isSubscriber?: boolean;
+  }): { download: DBPdfDownload; stat: DBPdfStat } {
+    const data = ensureDb();
+    if (!data.pdfDownloads) data.pdfDownloads = [];
+    if (!data.pdfStats) {
+      data.pdfStats = JSON.parse(JSON.stringify(BASE_PDF_STATS));
+    }
+
+    const now = new Date().toISOString();
+    const email = (payload.userEmail || "anonymous@member.qsn").toLowerCase().trim();
+    const isSub = payload.isSubscriber ?? db.isSubscribed(email);
+
+    const download: DBPdfDownload = {
+      id: `pdf_dl_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`,
+      pdfId: payload.pdfId,
+      pdfTitle: payload.pdfTitle,
+      fileName: payload.fileName,
+      category: payload.category || "Digital Asset",
+      fileSize: payload.fileSize || "PDF",
+      userEmail: email,
+      userName: payload.userName || "Quarter Spoon Member",
+      isSubscriber: isSub,
+      timestamp: now,
+    };
+
+    data.pdfDownloads.unshift(download);
+    if (data.pdfDownloads.length > 500) {
+      data.pdfDownloads = data.pdfDownloads.slice(0, 500);
+    }
+
+    const pdfStats: Record<string, DBPdfStat> =
+      data.pdfStats || (data.pdfStats = JSON.parse(JSON.stringify(BASE_PDF_STATS)));
+
+    if (!pdfStats[payload.pdfId]) {
+      pdfStats[payload.pdfId] = {
+        pdfId: payload.pdfId,
+        pdfTitle: payload.pdfTitle,
+        fileName: payload.fileName,
+        category: payload.category || "Digital Asset",
+        fileSize: payload.fileSize || "PDF",
+        totalDownloads: 0,
+        subscriberDownloads: 0,
+        nonSubscriberDownloads: 0,
+        lastDownloadedAt: null,
+      };
+    }
+
+    const stat = pdfStats[payload.pdfId];
+    stat.totalDownloads += 1;
+    stat.lastDownloadedAt = now;
+    if (isSub) {
+      stat.subscriberDownloads += 1;
+    } else {
+      stat.nonSubscriberDownloads += 1;
+    }
+
+    writeDb(data);
+    return { download, stat };
+  },
+
+  getPdfStats(): DBPdfStat[] {
+    const data = ensureDb();
+    if (!data.pdfStats) {
+      data.pdfStats = JSON.parse(JSON.stringify(BASE_PDF_STATS));
+      writeDb(data);
+    }
+    return Object.values(data.pdfStats || {});
+  },
+
+  getRecentPdfDownloads(limit = 40): DBPdfDownload[] {
+    const data = ensureDb();
+    return (data.pdfDownloads || []).slice(0, limit);
   },
 };

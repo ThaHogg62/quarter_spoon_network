@@ -102,6 +102,35 @@ export default function DigitalWorkflowPage() {
     setTimeout(() => setCopiedIndex(null), 2000);
   };
 
+  const trackDownload = async (
+    pdfId: string,
+    pdfTitle: string,
+    fileName: string,
+    category: string,
+    fileSize: string
+  ) => {
+    try {
+      fetch("/api/download/track", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          pdfId,
+          pdfTitle,
+          fileName,
+          category,
+          fileSize,
+          userEmail: user?.email || "anonymous@quarterspoon.com",
+          userName: user?.fullName || "Tha Network Subscriber",
+          isSubscriber: isSubscribed ?? true,
+        }),
+      }).catch((err) => {
+        console.warn("Telemetry track error:", err);
+      });
+    } catch (err) {
+      console.warn("Download telemetry dispatch failed:", err);
+    }
+  };
+
   const handleSendSuggestion = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!suggestionText.trim() || !user?.email) return;
@@ -478,6 +507,15 @@ export default function DigitalWorkflowPage() {
                   <a
                     href="/downloads/the_plug_and_play_production_suite_vol1.pdf"
                     download="The_Plug_And_Play_Production_Suite_Vol1.pdf"
+                    onClick={() =>
+                      trackDownload(
+                        "plug-and-play-suite-vol1",
+                        "The Plug-And-Play Production Suite (Vol. 1)",
+                        "the_plug_and_play_production_suite_vol1.pdf",
+                        "T2I / I2V Blueprints",
+                        "138 KB"
+                      )
+                    }
                     className="relative block p-[1.5px] rounded-xl overflow-hidden group/btn shadow-[0_0_20px_rgba(255,255,255,0.25)] hover:shadow-[0_0_30px_rgba(255,255,255,0.6)] transition-shadow cursor-pointer"
                   >
                     {/* Glowing Neon White Beam Rotating Constantly in Synchronized Motion */}
@@ -502,6 +540,15 @@ export default function DigitalWorkflowPage() {
                   <a
                     href="/downloads/basic_character_t2i_i2v.pdf"
                     download="Basic_Character_T2I_I2V_Monster_Master_Set.pdf"
+                    onClick={() =>
+                      trackDownload(
+                        "monster-master-set",
+                        "Monster Master Set // Basic Character T2I & I2V",
+                        "basic_character_t2i_i2v.pdf",
+                        "Forensic Optics & JSON",
+                        "118 KB"
+                      )
+                    }
                     className="relative block p-[1.5px] rounded-xl overflow-hidden group/btn shadow-[0_0_20px_rgba(255,255,255,0.25)] hover:shadow-[0_0_30px_rgba(255,255,255,0.6)] transition-shadow cursor-pointer"
                   >
                     {/* Glowing Neon White Beam Rotating Constantly in Synchronized Motion */}

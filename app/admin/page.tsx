@@ -26,6 +26,8 @@ import {
   Zap,
   Play,
   Film,
+  FileText,
+  ArrowDownToLine,
   MessageSquare,
   Check,
 } from "lucide-react";
@@ -107,12 +109,38 @@ interface AdminGameInquiry {
   status?: "pending" | "replied";
 }
 
+interface AdminPdfStat {
+  pdfId: string;
+  pdfTitle: string;
+  fileName: string;
+  category: string;
+  fileSize: string;
+  totalDownloads: number;
+  subscriberDownloads: number;
+  nonSubscriberDownloads: number;
+  lastDownloadedAt: string | null;
+}
+
+interface AdminPdfDownload {
+  id: string;
+  pdfId: string;
+  pdfTitle: string;
+  fileName: string;
+  category: string;
+  fileSize: string;
+  userEmail: string;
+  userName: string;
+  isSubscriber: boolean;
+  timestamp: string;
+}
+
 interface AdminTelemetryData {
   metrics: {
     totalUsers: number;
     totalSubscribers: number;
     activeRecently: number;
     nonSubscribersCount: number;
+    totalPdfDownloads?: number;
   };
   subscribers: AdminSubscriber[];
   users: AdminUser[];
@@ -121,6 +149,8 @@ interface AdminTelemetryData {
   videoStats?: AdminVideoStat[];
   recentVideoPlays?: AdminVideoPlay[];
   gameInquiries?: AdminGameInquiry[];
+  pdfStats?: AdminPdfStat[];
+  recentPdfDownloads?: AdminPdfDownload[];
   templates: {
     thankYou: { subject: string; text: string; html: string };
     invite: { subject: string; text: string; html: string };
@@ -690,20 +720,20 @@ export default function AdminDashboardPage() {
         </div>
 
         {/* ========================================================================= */}
-        {/* 4 CORE METRIC CARDS                                                       */}
+        {/* 5 CORE METRIC CARDS                                                       */}
         {/* ========================================================================= */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
           {/* Card 1: Tha Network Subscribers */}
-          <div className="relative rounded-2xl bg-[#090D17] border border-cyan-500/30 p-6 space-y-3 overflow-hidden shadow-2xl group hover:border-cyan-400 transition-colors">
+          <div className="relative rounded-2xl bg-[#090D17] border border-cyan-500/30 p-5 space-y-2.5 overflow-hidden shadow-2xl group hover:border-cyan-400 transition-colors">
             <div className="flex items-center justify-between">
-              <span className="text-[10px] font-mono tracking-[2px] uppercase text-cyan-400">
-                THA NETWORK LIST
+              <span className="text-[10px] font-mono tracking-[2px] uppercase text-cyan-400 font-bold">
+                THA NETWORK
               </span>
               <div className="p-2 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400">
                 <Radio className="w-4 h-4" />
               </div>
             </div>
-            <div className="text-3xl sm:text-4xl font-black text-white">
+            <div className="text-3xl font-black text-white">
               {data?.metrics.totalSubscribers ?? "..."}
             </div>
             <div className="flex items-center space-x-1.5 text-xs text-zinc-400">
@@ -713,16 +743,16 @@ export default function AdminDashboardPage() {
           </div>
 
           {/* Card 2: Total Registered Members */}
-          <div className="relative rounded-2xl bg-[#090D17] border border-white/10 p-6 space-y-3 overflow-hidden shadow-2xl group hover:border-white/20 transition-colors">
+          <div className="relative rounded-2xl bg-[#090D17] border border-white/10 p-5 space-y-2.5 overflow-hidden shadow-2xl group hover:border-white/20 transition-colors">
             <div className="flex items-center justify-between">
-              <span className="text-[10px] font-mono tracking-[2px] uppercase text-zinc-400">
-                REGISTERED USERS
+              <span className="text-[10px] font-mono tracking-[2px] uppercase text-zinc-400 font-bold">
+                REGISTERED
               </span>
               <div className="p-2 rounded-xl bg-white/5 border border-white/10 text-white">
                 <Users className="w-4 h-4" />
               </div>
             </div>
-            <div className="text-3xl sm:text-4xl font-black text-white">
+            <div className="text-3xl font-black text-white">
               {data?.metrics.totalUsers ?? "..."}
             </div>
             <div className="flex items-center space-x-1.5 text-xs text-zinc-400">
@@ -731,16 +761,16 @@ export default function AdminDashboardPage() {
           </div>
 
           {/* Card 3: Active Logged In Users */}
-          <div className="relative rounded-2xl bg-[#090D17] border border-emerald-500/30 p-6 space-y-3 overflow-hidden shadow-2xl group hover:border-emerald-400 transition-colors">
+          <div className="relative rounded-2xl bg-[#090D17] border border-emerald-500/30 p-5 space-y-2.5 overflow-hidden shadow-2xl group hover:border-emerald-400 transition-colors">
             <div className="flex items-center justify-between">
-              <span className="text-[10px] font-mono tracking-[2px] uppercase text-emerald-400">
+              <span className="text-[10px] font-mono tracking-[2px] uppercase text-emerald-400 font-bold">
                 ACTIVE SESSIONS
               </span>
               <div className="p-2 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400">
                 <Clock className="w-4 h-4" />
               </div>
             </div>
-            <div className="text-3xl sm:text-4xl font-black text-white">
+            <div className="text-3xl font-black text-white">
               {data?.metrics.activeRecently ?? "..."}
             </div>
             <div className="flex items-center space-x-1.5 text-xs text-emerald-400">
@@ -750,20 +780,39 @@ export default function AdminDashboardPage() {
           </div>
 
           {/* Card 4: Non-Subscribed Users */}
-          <div className="relative rounded-2xl bg-[#090D17] border border-amber-500/30 p-6 space-y-3 overflow-hidden shadow-2xl group hover:border-amber-400 transition-colors">
+          <div className="relative rounded-2xl bg-[#090D17] border border-amber-500/30 p-5 space-y-2.5 overflow-hidden shadow-2xl group hover:border-amber-400 transition-colors">
             <div className="flex items-center justify-between">
-              <span className="text-[10px] font-mono tracking-[2px] uppercase text-amber-400">
+              <span className="text-[10px] font-mono tracking-[2px] uppercase text-amber-400 font-bold">
                 NON-SUBSCRIBERS
               </span>
               <div className="p-2 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-400">
                 <Mail className="w-4 h-4" />
               </div>
             </div>
-            <div className="text-3xl sm:text-4xl font-black text-white">
+            <div className="text-3xl font-black text-white">
               {data?.metrics.nonSubscribersCount ?? "..."}
             </div>
             <div className="flex items-center space-x-1.5 text-xs text-amber-300">
               <span>Target for invite blast</span>
+            </div>
+          </div>
+
+          {/* Card 5: PDF Blueprint Downloads */}
+          <div className="relative rounded-2xl bg-[#090D17] border border-cyan-400/30 p-5 space-y-2.5 overflow-hidden shadow-2xl group hover:border-cyan-400 transition-colors">
+            <div className="flex items-center justify-between">
+              <span className="text-[10px] font-mono tracking-[2px] uppercase text-cyan-400 font-bold">
+                PDF DOWNLOADS
+              </span>
+              <div className="p-2 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400">
+                <ArrowDownToLine className="w-4 h-4" />
+              </div>
+            </div>
+            <div className="text-3xl font-black text-white">
+              {data?.metrics.totalPdfDownloads ?? 0}
+            </div>
+            <div className="flex items-center space-x-1.5 text-xs text-cyan-300">
+              <span className="w-2 h-2 rounded-full bg-cyan-400" />
+              <span>Vault Blueprints Delivered</span>
             </div>
           </div>
         </div>
@@ -1340,7 +1389,216 @@ export default function AdminDashboardPage() {
         </div>
 
         {/* ========================================================================= */}
-        {/* TABLE 4: "GET U SOME GAME" & SUGGESTION BOX INQUIRIES                      */}
+        {/* TABLE 4: LIVE PDF DOWNLOAD COUNTER (SUBSCRIBER VS NON-SUBSCRIBER)         */}
+        {/* ========================================================================= */}
+        <div className="space-y-4 pt-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <div className="flex items-center space-x-2">
+                <div className="p-2 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400">
+                  <ArrowDownToLine className="w-4 h-4" />
+                </div>
+                <h2 className="text-xl sm:text-2xl font-black uppercase text-white tracking-wide">
+                  4. Live PDF Download Counter
+                </h2>
+                <span className="px-2.5 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-400/40 font-mono text-xs font-bold">
+                  {data?.pdfStats?.length || 0} Assets Monitored
+                </span>
+              </div>
+              <p className="text-xs text-zinc-400 font-light pt-1">
+                Real-time PDF blueprint download telemetry differentiating downloads by VIP &ldquo;Tha Network&rdquo; Subscribers versus Non-Subscribers. Strictly authentic live numbers (no placeholders).
+              </p>
+            </div>
+
+            <div className="flex items-center space-x-3 text-xs font-mono">
+              <div className="flex items-center space-x-1.5 bg-black/50 border border-white/10 px-3 py-1.5 rounded-xl">
+                <span className="w-2.5 h-2.5 rounded-sm bg-cyan-400 inline-block" />
+                <span className="text-zinc-300">VIP Subscribers</span>
+              </div>
+              <div className="flex items-center space-x-1.5 bg-black/50 border border-white/10 px-3 py-1.5 rounded-xl">
+                <span className="w-2.5 h-2.5 rounded-sm bg-amber-400 inline-block" />
+                <span className="text-zinc-300">Non-Subscribers</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Main PDF Statistics Table */}
+          <div className="overflow-x-auto rounded-2xl border border-white/10 bg-[#090D17] shadow-2xl">
+            <table className="w-full text-left border-collapse text-xs">
+              <thead>
+                <tr className="border-b border-white/10 bg-black/40 font-mono text-[11px] text-zinc-400 uppercase tracking-wider">
+                  <th className="py-3.5 px-6">PDF Asset / Blueprint</th>
+                  <th className="py-3.5 px-6">Category</th>
+                  <th className="py-3.5 px-6">File Size</th>
+                  <th className="py-3.5 px-6">Total Downloads</th>
+                  <th className="py-3.5 px-6">Subscriber Downloads</th>
+                  <th className="py-3.5 px-6">Non-Subscriber Downloads</th>
+                  <th className="py-3.5 px-6 text-right">Last Downloaded</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-white/5">
+                {!data?.pdfStats || data.pdfStats.length === 0 ? (
+                  <tr>
+                    <td colSpan={7} className="py-8 text-center text-zinc-500 font-mono">
+                      No PDF download telemetry logged yet.
+                    </td>
+                  </tr>
+                ) : (
+                  data.pdfStats.map((stat) => {
+                    const subPct =
+                      stat.totalDownloads > 0
+                        ? Math.round((stat.subscriberDownloads / stat.totalDownloads) * 100)
+                        : 0;
+                    const nonSubPct =
+                      stat.totalDownloads > 0
+                        ? Math.round((stat.nonSubscriberDownloads / stat.totalDownloads) * 100)
+                        : 0;
+
+                    return (
+                      <tr key={stat.pdfId} className="hover:bg-white/[0.02] transition-colors">
+                        <td className="py-4 px-6">
+                          <div className="flex items-center space-x-3">
+                            <div className="w-8 h-8 rounded-lg bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400">
+                              <FileText className="w-3.5 h-3.5" />
+                            </div>
+                            <div>
+                              <span className="font-bold text-white block text-sm tracking-wide">
+                                {stat.pdfTitle}
+                              </span>
+                              <span className="font-mono text-[10px] text-zinc-500">
+                                {stat.fileName}
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+
+                        <td className="py-4 px-6 font-mono text-zinc-400">
+                          <span className="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-[10px] uppercase font-bold text-zinc-300">
+                            {stat.category}
+                          </span>
+                        </td>
+
+                        <td className="py-4 px-6 font-mono text-zinc-400">
+                          <span className="px-2 py-0.5 rounded bg-black/40 border border-white/10 text-[10px] text-zinc-300">
+                            {stat.fileSize}
+                          </span>
+                        </td>
+
+                        <td className="py-4 px-6">
+                          <div className="flex items-baseline space-x-1.5 font-mono">
+                            <span className="text-xl font-black text-white">
+                              {stat.totalDownloads}
+                            </span>
+                            <span className="text-[10px] text-zinc-500 uppercase">downloads</span>
+                          </div>
+                        </td>
+
+                        <td className="py-4 px-6">
+                          <div className="space-y-1.5">
+                            <div className="flex items-center justify-between font-mono text-[11px]">
+                              <span className="font-bold text-cyan-300">
+                                {stat.subscriberDownloads} downloads
+                              </span>
+                              <span className="text-cyan-400/80">{subPct}%</span>
+                            </div>
+                            <div className="w-32 h-1.5 bg-black/60 rounded-full overflow-hidden border border-white/5">
+                              <div
+                                className="h-full bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full transition-all duration-500"
+                                style={{ width: `${subPct}%` }}
+                              />
+                            </div>
+                          </div>
+                        </td>
+
+                        <td className="py-4 px-6">
+                          <div className="space-y-1.5">
+                            <div className="flex items-center justify-between font-mono text-[11px]">
+                              <span className="font-bold text-amber-300">
+                                {stat.nonSubscriberDownloads} downloads
+                              </span>
+                              <span className="text-amber-400/80">{nonSubPct}%</span>
+                            </div>
+                            <div className="w-32 h-1.5 bg-black/60 rounded-full overflow-hidden border border-white/5">
+                              <div
+                                className="h-full bg-gradient-to-r from-amber-500 to-orange-500 rounded-full transition-all duration-500"
+                                style={{ width: `${nonSubPct}%` }}
+                              />
+                            </div>
+                          </div>
+                        </td>
+
+                        <td className="py-4 px-6 text-right font-mono text-zinc-400">
+                          {stat.lastDownloadedAt ? (
+                            <>
+                              <div>{formatTimeAgo(stat.lastDownloadedAt)}</div>
+                              <div className="text-[10px] text-zinc-600">
+                                {formatDateExact(stat.lastDownloadedAt)}
+                              </div>
+                            </>
+                          ) : (
+                            <span className="text-zinc-500 text-[11px]">No downloads yet</span>
+                          )}
+                        </td>
+                      </tr>
+                    );
+                  })
+                )}
+              </tbody>
+            </table>
+          </div>
+
+          {/* Recent PDF Downloads Real-Time Feed */}
+          {data?.recentPdfDownloads && data.recentPdfDownloads.length > 0 ? (
+            <div className="bg-black/40 border border-white/10 rounded-xl p-4 space-y-3">
+              <div className="flex items-center justify-between">
+                <span className="text-[10px] font-mono tracking-[2px] uppercase text-zinc-400 flex items-center space-x-1.5">
+                  <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
+                  <span>Real-Time PDF Download Telemetry Stream</span>
+                </span>
+                <span className="text-[10px] font-mono text-zinc-500">
+                  Last {data.recentPdfDownloads.length} recorded events
+                </span>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5 max-h-48 overflow-y-auto pr-1">
+                {data.recentPdfDownloads.slice(0, 8).map((p) => (
+                  <div
+                    key={p.id}
+                    className="p-2.5 rounded-lg bg-[#090D17] border border-white/5 text-[11px] font-mono space-y-1"
+                  >
+                    <div className="flex items-center justify-between">
+                      <span className="text-white font-bold truncate max-w-[130px]">
+                        {p.pdfTitle}
+                      </span>
+                      <span
+                        className={`text-[9px] px-1.5 py-0.5 rounded font-bold ${
+                          p.isSubscriber
+                            ? "bg-cyan-500/20 text-cyan-300 border border-cyan-400/30"
+                            : "bg-amber-500/20 text-amber-300 border border-amber-400/30"
+                        }`}
+                      >
+                        {p.isSubscriber ? "VIP SUB" : "GUEST"}
+                      </span>
+                    </div>
+                    <div className="text-zinc-400 text-[10px] truncate">{p.userName || p.userEmail}</div>
+                    <div className="text-zinc-600 text-[9px]">{formatTimeAgo(p.timestamp)}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <div className="bg-black/30 border border-white/5 rounded-xl p-3.5 flex items-center justify-between text-xs font-mono text-zinc-500">
+              <div className="flex items-center space-x-2">
+                <span className="w-2 h-2 rounded-full bg-cyan-400/60" />
+                <span>Real-Time Download Stream &bull; Live Telemetry Listener Active</span>
+              </div>
+              <span className="text-[11px]">Strict 0 count (no mock downloads)</span>
+            </div>
+          )}
+        </div>
+
+        {/* ========================================================================= */}
+        {/* TABLE 5: "GET U SOME GAME" & SUGGESTION BOX INQUIRIES                      */}
         {/* ========================================================================= */}
         <div className="space-y-4 pt-4">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -1350,7 +1608,7 @@ export default function AdminDashboardPage() {
                   <MessageSquare className="w-4 h-4" />
                 </div>
                 <h2 className="text-xl sm:text-2xl font-black uppercase text-white tracking-wide">
-                  4. &ldquo;Get U Some Game&rdquo; &amp; Suggestion Inquiries
+                  5. &ldquo;Get U Some Game&rdquo; &amp; Suggestion Inquiries
                 </h2>
                 <span className="px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-400/40 font-mono text-xs font-bold">
                   {data?.gameInquiries?.length || 0} Inquiries
@@ -1453,7 +1711,7 @@ export default function AdminDashboardPage() {
           <div className="flex items-center justify-between">
             <div>
               <h2 className="text-xl sm:text-2xl font-black uppercase text-white tracking-wide">
-                5. Recent Email Dispatches
+                6. Recent Email Dispatches
               </h2>
               <p className="text-xs text-zinc-400 font-light">
                 Real-time audit log of all manual invites, automated thank-yous, and network blasts.

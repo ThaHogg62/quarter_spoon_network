@@ -29,6 +29,9 @@ export async function GET(request: Request) {
     const videoStats = db.getVideoStats();
     const recentVideoPlays = db.getRecentVideoPlays(30);
     const gameInquiries = db.getGameInquiries(30);
+    const pdfStats = db.getPdfStats();
+    const recentPdfDownloads = db.getRecentPdfDownloads(30);
+    const totalPdfDownloads = pdfStats.reduce((acc, s) => acc + (s.totalDownloads || 0), 0);
 
     // Compute user subscription mapping
     const subscribedEmailSet = new Set(
@@ -69,6 +72,7 @@ export async function GET(request: Request) {
         totalSubscribers: subscribers.filter((s) => s.status === "active").length,
         activeRecently: Math.max(activeRecentlyCount, 1),
         nonSubscribersCount,
+        totalPdfDownloads,
       },
       subscribers,
       users: usersWithSubStatus,
@@ -77,6 +81,8 @@ export async function GET(request: Request) {
       videoStats,
       recentVideoPlays,
       gameInquiries,
+      pdfStats,
+      recentPdfDownloads,
       templates: {
         thankYou: sampleThankYou,
         invite: sampleInvite,
