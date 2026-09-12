@@ -1,10 +1,1 @@
 @AGENTS.md
-
-# Quarter Spoon Network // Universal Project Memory & Guidelines
-
-- Follow all specifications in MEMORY_SKILLED.md and WEBSITE_SKILL_MOTION.md.
-- STRICTLY REAL DATA ONLY: Never inject fake users, fake video plays, or mock counts.
-- ADMIN ACCESS: Only mrdulow12@gmail.com and qse6209@gmail.com.
-- GET U SOME GAME: Only visible on /tha-visuals for subscribed members. Never on home page.
-- VOICE: Authentic Tha Hogg West Fresno street culture tone. Signed "Tha Hogg".
-- VERIFICATION: Always test builds with 'npm run build'.
