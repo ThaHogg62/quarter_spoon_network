@@ -10,6 +10,10 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --color-qse-slate: #0A0F1D;
+  --color-qse-chrome: #94A3B8;
+  --color-qse-neon-blue: #0044FF;
+  --color-qse-electric-navy: #0033CC;
 }
 
 @media (prefers-color-scheme: dark) {

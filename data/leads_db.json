@@ -1,0 +1,40 @@
+{
+  "leadConversions": [
+    {
+      "id": "cuid_1789950989857_sa0050n",
+      "email": "vip_lead@gmail.com",
+      "name": "Test VIP Lead",
+      "appName": "Quarter Spoon Network",
+      "source": "Hero CTA",
+      "details": "Interested in T2I Blueprints",
+      "endpointUsed": "PRIMARY_XQARR3VL",
+      "status": "WEBHOOK_CONFIRMED",
+      "ipAddress": null,
+      "userAgent": null,
+      "createdAt": "2026-09-21T00:36:29.857Z"
+    },
+    {
+      "id": "lead_init_1",
+      "email": "mrdulow12@gmail.com",
+      "name": "Tha Hogg",
+      "appName": "Quarter Spoon Network",
+      "source": "Founding Lead",
+      "details": "Lead routing initialization & system test",
+      "endpointUsed": "PRIMARY_XQARR3VL",
+      "status": "DELIVERED",
+      "createdAt": "2026-09-21T00:36:29.856Z"
+    },
+    {
+      "id": "lead_init_2",
+      "email": "qse6209@gmail.com",
+      "name": "Quarter Spoon Executive",
+      "appName": "Unda Tha Radar",
+      "source": "Executive Portal",
+      "details": "Failover endpoint telemetry validation",
+      "endpointUsed": "BACKUP_MLGWJNYK",
+      "status": "FAILOVER_REROUTED",
+      "createdAt": "2026-09-20T23:36:29.856Z"
+    }
+  ],
+  "userActivities": []
+}

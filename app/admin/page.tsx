@@ -30,6 +30,7 @@ import {
   ArrowDownToLine,
   MessageSquare,
   Check,
+  Activity,
 } from "lucide-react";
 import DirectReplyModal from "@/components/DirectReplyModal";
 
@@ -701,6 +702,14 @@ export default function AdminDashboardPage() {
 
           {/* Blast Quick Action Buttons */}
           <div className="flex flex-wrap items-center gap-3 shrink-0">
+            <Link
+              href="/admin/dashboard"
+              className="flex items-center space-x-2.5 bg-[#0044FF] hover:bg-[#0033CC] text-white font-black text-xs uppercase tracking-[2px] px-5 py-3.5 rounded-xl shadow-[0_4px_30px_rgba(0,68,255,0.4)] transition-all cursor-pointer transform hover:scale-[1.02] active:scale-95"
+            >
+              <Activity className="w-4 h-4 text-white" />
+              <span>Multi-App Lead Analytics</span>
+            </Link>
+
             <button
               onClick={() => setSubscriberBlastModalOpen(true)}
               className="flex items-center space-x-2.5 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-black font-black text-xs uppercase tracking-[2px] px-5 py-3.5 rounded-xl shadow-[0_4px_30px_rgba(6,182,212,0.35)] transition-all cursor-pointer transform hover:scale-[1.02] active:scale-95"

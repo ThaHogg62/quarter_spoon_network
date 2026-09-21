@@ -1,0 +1,41 @@
+// Prisma Schema for Quarter Spoon Network & Multi-App Infrastructure
+// Universal Lead Conversion & User Activity Tracking
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model LeadConversion {
+  id            String   @id @default(cuid())
+  email         String
+  name          String?
+  appName       String   // e.g., "Quarter Spoon Network", "Unda Tha Radar", "Visual Lab"
+  source        String   // e.g., "Hero CTA", "Footer Form", "Consulting Popup"
+  details       String?  @db.Text
+  endpointUsed  String   // "PRIMARY_XQARR3VL" or "BACKUP_MLGWJNYK"
+  status        String   @default("DELIVERED") // "DELIVERED", "FAILOVER_REROUTED", "FLAGGED", "WEBHOOK_CONFIRMED"
+  ipAddress     String?
+  userAgent     String?
+  createdAt     DateTime @default(now())
+
+  @@index([appName])
+  @@index([email])
+  @@index([createdAt])
+}
+
+model UserActivity {
+  id            String   @id @default(cuid())
+  email         String   @unique
+  name          String?
+  loginCount    Int      @default(0)
+  lastEventType String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([email])
+}
